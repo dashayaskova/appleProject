@@ -4,11 +4,11 @@ using AppleTimer.Tools.Navigation;
 namespace AppleTimer.Views
 {
     /// <summary>
-    /// Interaction logic for LoginControlView.xaml
+    /// Interaction logic for SignUpControlView.xaml
     /// </summary>
-    public partial class LoginControlView : UserControl, INavigatable
+    public partial class SignUpControlView : UserControl, INavigatable
     {
-        public LoginControlView()
+        public SignUpControlView()
         {
             InitializeComponent();
         }
