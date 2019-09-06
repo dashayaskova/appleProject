@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using AppleTimer.Tools.Navigation;
+using AppleTimer.ViewModels;
 
 namespace AppleTimer.Views
 {
@@ -11,6 +12,7 @@ namespace AppleTimer.Views
         public LoginControlView()
         {
             InitializeComponent();
+            DataContext = new LoginViewModel();
         }
     }
 }

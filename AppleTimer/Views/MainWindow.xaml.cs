@@ -25,6 +25,8 @@ namespace AppleTimer.Views
 
  
             NavigationManager.Instance.Initialize(new InitializationNavigationModel(this));
+            Width = 400;
+            Height = 550;
             NavigationManager.Instance.Navigate(ViewType.LoginView);
         }
 

@@ -5,8 +5,70 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AppleTimer.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="550" d:DesignWidth="400">
     <Grid>
-        <TextBlock FontSize="90">SignUp</TextBlock>
-</Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="0" Grid.Row="0" 
+                   FontSize="35" TextAlignment="Center"
+                   VerticalAlignment="Center">
+            AppleTimer <LineBreak/>
+            <Button Content="SignUp with Google" Height="25" FontSize="15" Margin="8"/>
+        </TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="1"
+                   FontSize="15" Margin="8 0 0 0" Text="Username" />
+        <TextBox Grid.Column="0" Grid.Row="2"
+                 Margin="8"
+                 Text="{Binding Username, Mode=TwoWay}"/>
+        <TextBlock Grid.Column="0" Grid.Row="3"
+                   FontSize="15" Margin="8 0 0 0" Text="Name" />
+        <TextBox Grid.Column="0" Grid.Row="4"
+                 Margin="8"/>
+        <TextBlock Grid.Column="0" Grid.Row="5"
+                   FontSize="15" Margin="8 0 0 0" Text="Surname" />
+        <TextBox Grid.Column="0" Grid.Row="6"
+                 Margin="8"/>
+        <TextBlock Grid.Column="0" Grid.Row="7"
+                   FontSize="15" Margin="8 0 0 0" Text="Email" />
+        <TextBox Grid.Column="0" Grid.Row="8"
+                 Margin="8"
+                 Text="{Binding Email, Mode=TwoWay}"/>
+        <TextBlock Grid.Column="0" Grid.Row="9"
+                   FontSize="15"  Margin="8 0 0 0" Text="Password" />
+        <PasswordBox Grid.Column="0" Grid.Row="10"
+                     Name="PBpass1"
+                     Margin="8"/>
+        <TextBlock Grid.Column="0" Grid.Row="11"
+                   FontSize="15"  Margin="8 0 0 0" Text="Repeat password" />
+        <PasswordBox Grid.Column="0" Grid.Row="12"
+                     Margin="8"/>
+        <Grid Grid.Column="0" Grid.Row="13">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Row="0" Grid.Column="0"
+                    Content="Cancel" Margin="8"
+                    Command="{Binding CancelCommand}"/>
+            <Button Grid.Row="0" Grid.Column="1"
+                    Content="SignUp" Margin="8"
+                    Command="{Binding SignUpCommand}" CommandParameter="{Binding ElementName=PBpass1}"/>
+        </Grid>
+     
+    </Grid>
 </UserControl>
