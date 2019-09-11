@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using AppleTimer.Models;
 using AppleTimer.Tools;
 using AppleTimer.Tools.Managers;
 using AppleTimer.Tools.Navigation;
@@ -44,12 +45,19 @@ namespace AppleTimer.ViewModels
 
         private void DoSignUp(PasswordBox pb)
         {
-            MessageBox.Show(pb.Password + "BLlAAAAA");
+            User user = new User();
+            user.Username = Username;
+            user.Name = Name;
+            user.Surname = Surname;
+            user.Email = Email;
+            user.Password = pb.Password;
+
         }
 
-        private bool CanSignUp(object obj)
+        private bool CanSignUp(PasswordBox pb)
         {
-            return !String.IsNullOrEmpty(Username);
+            return !String.IsNullOrEmpty(Username) && !String.IsNullOrEmpty(pb.Password)
+                                                   && !String.IsNullOrEmpty(Email);
         }
 
         #endregion

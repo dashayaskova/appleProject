@@ -1,4 +1,6 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Controls;
+using System.Windows.Input;
 using AppleTimer.Tools;
 using AppleTimer.Tools.Managers;
 using AppleTimer.Tools.Navigation;
@@ -10,7 +12,7 @@ namespace AppleTimer.ViewModels
         #region Fields
 
         private RelayCommand<object> _signUpCommand;
-        private RelayCommand<object> _loginCommand;
+        private RelayCommand<PasswordBox> _loginCommand;
 
         #endregion
 
@@ -26,6 +28,21 @@ namespace AppleTimer.ViewModels
                 }));
             }
         }
+
+        public RelayCommand<PasswordBox> LoginCommand
+        {
+            get
+            {
+                return _loginCommand ?? (_loginCommand = new RelayCommand<PasswordBox>(pb =>
+                {
+
+                }, pb => !String.IsNullOrEmpty(pb.Password) && !String.IsNullOrEmpty(Username)));
+            }
+        }
+
+        public string Username { get; set; }
+        public string Password { get; set; }
+
 
         #endregion
     }

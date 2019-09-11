@@ -24,14 +24,17 @@
         <TextBlock Grid.Column="0" Grid.Row="1"
                    FontSize="20" Margin="8 0 0 0" Text="Username" />
         <TextBox Grid.Column="0" Grid.Row="2"
-                 Margin="8"/>
+                 Margin="8"
+                 Text="{Binding Username, Mode=TwoWay}"/>
         <TextBlock Grid.Column="0" Grid.Row="3"
                    FontSize="20"  Margin="8 0 0 0" Text="Password" />
         <PasswordBox Grid.Column="0" Grid.Row="4"
-                     Margin="8"/>
+                     Margin="8"
+                     Name="PBpass1"/>
         <Button Grid.Column="0" Grid.Row="6"
                 Width="150" Margin="8" Content="Login"
-                FontSize="25"/>
+                FontSize="25"
+                Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=PBpass1}"/>
         <TextBlock Grid.Column="0" Grid.Row="7" TextAlignment="Center">
             Not a member yet? <LineBreak/>
             <Button Content="SignUp" HorizontalAlignment="Center" Background="Transparent"
