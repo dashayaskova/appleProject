@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Windows.Media;
 
 namespace AppleTimer.Models
 {
 	public class Record
 	{
+        public Guid Id { get; set; }
 		public User User { get; set; }
 		public DateTime StartTime { get; set; }
 		public long Duration { get; set; }
