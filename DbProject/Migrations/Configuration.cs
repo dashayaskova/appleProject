@@ -1,15 +1,17 @@
+using appleTimer.DbProject;
+
 namespace DbProject.Migrations
 {
     using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<DbProject.TimerContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<TimerContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(DbProject.TimerContext context)
+        protected override void Seed(TimerContext context)
         {
             //  This method will be called after migrating to the latest version.
 

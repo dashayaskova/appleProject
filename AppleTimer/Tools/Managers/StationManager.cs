@@ -1,4 +1,4 @@
-﻿using AppleTimer.Models;
+﻿using DbModels.Models;
 using System.Collections.Generic;
 
 namespace AppleTimer.Tools.Managers
@@ -9,6 +9,7 @@ namespace AppleTimer.Tools.Managers
 		public static Group CurGroup { get; set; }
 		public static Record CurRecord { get; set; } = new Record();
 		public static List<Record> Records { get; set; }
+		public static List<Group> Groups { get; set; }
 
 		public delegate void MyRefresh();
 

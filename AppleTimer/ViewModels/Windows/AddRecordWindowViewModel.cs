@@ -1,4 +1,4 @@
-﻿using AppleTimer.Models;
+﻿using DbModels.Models;
 using AppleTimer.Tools;
 using AppleTimer.Tools.Managers;
 using System;
@@ -34,7 +34,7 @@ namespace AppleTimer.ViewModels.Windows
 
 		private bool CanExecuteCommand(Object o)
 		{
-			return !String.IsNullOrEmpty(Record.Comment) && Record.Group.Color != null;
+			return !String.IsNullOrEmpty(Record.Comment) && Record.Group != null;
 		}
 
 		private void SaveImplementation(Window win)

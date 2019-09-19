@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Media;
 
-namespace AppleTimer.Models
+namespace DbModels.Models
 {
     public class Group
     {
@@ -12,8 +13,12 @@ namespace AppleTimer.Models
         #endregion
 
         #region Properties
+
+		public List<Record> Records { get; set; }
         public Guid Id { get; set; }
         public User User { get; set; }
+
+		public Guid UserId { get; set; }
         public string Name { get; set; }
         public string ColorString { get; set; }
 

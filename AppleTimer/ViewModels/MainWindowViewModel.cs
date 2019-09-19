@@ -1,6 +1,11 @@
 ﻿using System.Windows;
 using AppleTimer.Tools;
 using AppleTimer.Tools.Managers;
+using appleTimer.DbProject;
+using System.Linq;
+using Managers;
+using DbModels.Models;
+using System;
 
 namespace AppleTimer.ViewModels
 {
@@ -33,9 +38,16 @@ namespace AppleTimer.ViewModels
         }
         #endregion
 
-        internal MainWindowViewModel()
+        public MainWindowViewModel()
         {
             LoaderManeger.Instance.Initialize(this);
+
+			StationManager.Records = DbManager.GetUserRecords(new User() { Id = new Guid("DF215E10-8BD4-4401-B2DC-99BB03135F2E") });
+
+			using (var context = new TimerContext())
+			{
+				StationManager.Groups = context.Groups.ToList();
+			}
         }
     }
 }

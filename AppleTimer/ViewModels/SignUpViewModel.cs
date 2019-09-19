@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Windows;
 using System.Windows.Controls;
-using AppleTimer.Models;
+using DbModels.Models;
 using AppleTimer.Tools;
 using AppleTimer.Tools.Managers;
 using AppleTimer.Tools.Navigation;

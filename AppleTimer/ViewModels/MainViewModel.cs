@@ -1,4 +1,4 @@
-﻿using AppleTimer.Models;
+﻿using DbModels.Models;
 using AppleTimer.Tools;
 using AppleTimer.Tools.Managers;
 using AppleTimer.Views.Windows;
@@ -13,8 +13,7 @@ namespace AppleTimer.ViewModels
 	{
 		private string _time;
 
-		public List<Record> Records { get; set; } = new List<Record> { new Record { StartTime = DateTime.Now,
-			 Comment= "Уборка", Group = new Group()} };
+		public List<Record> Records { get; set; } = StationManager.Records;
 
 		public CollectionViewSource ViewSource { get; set; } = new CollectionViewSource();
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AppleTimer.Models
+namespace DbModels.Models
 {
     public class User
     {

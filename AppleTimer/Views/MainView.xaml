@@ -44,7 +44,7 @@
         </Grid.RowDefinitions>
 
 
-        <DataGrid Grid.RowSpan="4" ItemsSource="{Binding Records}" AutoGenerateColumns="False" BorderThickness="0">
+        <DataGrid Grid.RowSpan="4" ItemsSource="{Binding ViewSource.View}" AutoGenerateColumns="False" BorderThickness="0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Comment" Binding="{Binding Comment}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Time" Binding="{Binding Duration}"></DataGridTextColumn>

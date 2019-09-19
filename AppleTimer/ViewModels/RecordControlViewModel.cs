@@ -1,4 +1,4 @@
-﻿using AppleTimer.Models;
+﻿using DbModels.Models;
 using AppleTimer.Tools;
 using AppleTimer.Tools.Managers;
 using AppleTimer.Views.Windows;
@@ -26,7 +26,7 @@ namespace AppleTimer.ViewModels
 
 		public RecordControlViewModel()
 		{
-			Groups = new List<Group>() { new Group("#ff4000", "Home"), new Group("Green", "University") };
+			Groups = StationManager.Groups;
 			ViewSource.Source = Groups;
 
 			if (StationManager.IsWindow)

@@ -1,4 +1,4 @@
-﻿using AppleTimer.Models;
+﻿using DbModels.Models;
 using System.Data.Entity.ModelConfiguration;
 
 namespace DbProject.ModelConfigurations
@@ -7,9 +7,13 @@ namespace DbProject.ModelConfigurations
 	{
 		public RecordConfiguration()
 		{
-			ToTable("user");
-			HasKey(record => record.StartTime);
-			Property(record => record.StartTime).HasColumnName("username").IsRequired();
+			ToTable("record");
+			HasKey(record => record.Id);
+			Property(record => record.Id).HasColumnName("id").IsRequired();
+			Property(record => record.StartTime).HasColumnName("start_time").IsRequired();
+			Property(record => record.EndTime).HasColumnName("endTime");
+			Property(record => record.Comment).HasColumnName("comment");
+			Property(record => record.Duration).HasColumnName("duration");
 		}
 	}
 }
