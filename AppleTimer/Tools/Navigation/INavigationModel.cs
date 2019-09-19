@@ -3,7 +3,8 @@
     internal enum ViewType
     {
         LoginView,
-        SignUpView
+        SignUpView,
+		MainView
         
     }
 

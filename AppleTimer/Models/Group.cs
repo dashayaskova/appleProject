@@ -2,7 +2,7 @@
 
 namespace AppleTimer.Models
 {
-	class Group
+	public class Group
 	{
 		private Color _color;
 		public string Name { get; set; }

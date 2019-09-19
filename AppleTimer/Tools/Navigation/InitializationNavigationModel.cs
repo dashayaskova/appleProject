@@ -20,6 +20,9 @@ namespace AppleTimer.Tools.Navigation
                 case ViewType.SignUpView:
                     ViewsDictionary.Add(viewType, new SignUpControlView());
                     break;
+				case ViewType.MainView:
+					ViewsDictionary.Add(viewType, new MainView());
+					break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(viewType), viewType, null);
             }

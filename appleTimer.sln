@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.271
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29001.49
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppleTimer", "AppleTimer\AppleTimer.csproj", "{26732D46-33C5-4812-9E75-1068826F60FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbProject", "DbProject\DbProject.csproj", "{1F195594-DFE3-4515-83F9-CC43C2BF3B29}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{26732D46-33C5-4812-9E75-1068826F60FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26732D46-33C5-4812-9E75-1068826F60FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26732D46-33C5-4812-9E75-1068826F60FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F195594-DFE3-4515-83F9-CC43C2BF3B29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F195594-DFE3-4515-83F9-CC43C2BF3B29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F195594-DFE3-4515-83F9-CC43C2BF3B29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F195594-DFE3-4515-83F9-CC43C2BF3B29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

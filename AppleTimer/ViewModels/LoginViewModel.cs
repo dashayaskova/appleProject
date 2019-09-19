@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Controls;
-using System.Windows.Input;
 using AppleTimer.Tools;
 using AppleTimer.Tools.Managers;
 using AppleTimer.Tools.Navigation;
@@ -35,8 +34,8 @@ namespace AppleTimer.ViewModels
             {
                 return _loginCommand ?? (_loginCommand = new RelayCommand<PasswordBox>(pb =>
                 {
-
-                }, pb => !String.IsNullOrEmpty(pb.Password) && !String.IsNullOrEmpty(Username)));
+					NavigationManager.Instance.Navigate(ViewType.MainView);
+				}, pb => !String.IsNullOrEmpty(pb.Password) && !String.IsNullOrEmpty(Username)));
             }
         }
 
