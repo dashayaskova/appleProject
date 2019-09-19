@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AppleTimer.Models
 {
-    internal class User
+    public class User
     {
         public String Username { get; set; }
         public String Name { get; set; }
