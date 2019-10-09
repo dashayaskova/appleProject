@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="2190c04b-37c7-47bd-8a6d-1f3dd2bce59b" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="1b0872f6-e068-445e-a0a7-4f55309dbc3a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,12 +22,12 @@
     <MetadataSource Address="http://localhost:61856/TimerService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="TimerService.xsd" MetadataType="Schema" ID="38f1da36-8947-418e-b35c-e6d5bc7f3501" SourceId="1" SourceUrl="http://localhost:61856/TimerService.svc?xsd=xsd1" />
-    <MetadataFile FileName="TimerService.disco" MetadataType="Disco" ID="97def2cb-813d-47b3-9761-3953bc903779" SourceId="1" SourceUrl="http://localhost:61856/TimerService.svc?disco" />
-    <MetadataFile FileName="TimerService1.xsd" MetadataType="Schema" ID="9017c274-6729-46a9-b97d-958176056847" SourceId="1" SourceUrl="http://localhost:61856/TimerService.svc?xsd=xsd3" />
-    <MetadataFile FileName="TimerService2.xsd" MetadataType="Schema" ID="270f1999-d132-47b6-a44b-b8a7bf2a4099" SourceId="1" SourceUrl="http://localhost:61856/TimerService.svc?xsd=xsd0" />
-    <MetadataFile FileName="TimerService.wsdl" MetadataType="Wsdl" ID="5b0dbed6-ac1a-472f-9c2c-ca1ef91dfba5" SourceId="1" SourceUrl="http://localhost:61856/TimerService.svc?wsdl" />
-    <MetadataFile FileName="TimerService3.xsd" MetadataType="Schema" ID="300b6102-8e7c-43dc-9615-c954e9f401cb" SourceId="1" SourceUrl="http://localhost:61856/TimerService.svc?xsd=xsd2" />
+    <MetadataFile FileName="TimerService.xsd" MetadataType="Schema" ID="7b148dea-0b66-45f1-bb49-d017779e2310" SourceId="1" SourceUrl="http://localhost:61856/TimerService.svc?xsd=xsd1" />
+    <MetadataFile FileName="TimerService.disco" MetadataType="Disco" ID="78a20d73-a78a-4a2c-b87b-f1711d4089b9" SourceId="1" SourceUrl="http://localhost:61856/TimerService.svc?disco" />
+    <MetadataFile FileName="TimerService1.xsd" MetadataType="Schema" ID="0f46028f-3f8f-4fe8-8076-f68d76b673a3" SourceId="1" SourceUrl="http://localhost:61856/TimerService.svc?xsd=xsd3" />
+    <MetadataFile FileName="TimerService2.xsd" MetadataType="Schema" ID="ded95530-230f-4521-b462-2c58f0bd87b7" SourceId="1" SourceUrl="http://localhost:61856/TimerService.svc?xsd=xsd0" />
+    <MetadataFile FileName="TimerService.wsdl" MetadataType="Wsdl" ID="86b2bd06-c95e-474f-b8e2-36bf2b0d57c1" SourceId="1" SourceUrl="http://localhost:61856/TimerService.svc?wsdl" />
+    <MetadataFile FileName="TimerService3.xsd" MetadataType="Schema" ID="2d75e479-294c-41d2-b8dd-d999d9c3c3d8" SourceId="1" SourceUrl="http://localhost:61856/TimerService.svc?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -1,7 +1,5 @@
 ﻿using DbModels.Models;
-using DbProject;
 using Interface;
-using System.Collections.Generic;
 
 namespace Managers
 {

@@ -42,6 +42,14 @@ namespace AppleTimer.ViewModels
             }
         }
 
+        private bool CanSignUp(PasswordBox pb)
+        {
+            return !String.IsNullOrEmpty(Username) && !String.IsNullOrEmpty(pb.Password)
+                                                   && !String.IsNullOrEmpty(Email);
+        }
+
+        #endregion
+
         private void DoSignUp(PasswordBox pb)
         {
             User user = new User();
@@ -51,14 +59,7 @@ namespace AppleTimer.ViewModels
             user.Email = Email;
             user.Password = pb.Password;
 
+            //DBManager.AddUser(user);
         }
-
-        private bool CanSignUp(PasswordBox pb)
-        {
-            return !String.IsNullOrEmpty(Username) && !String.IsNullOrEmpty(pb.Password)
-                                                   && !String.IsNullOrEmpty(Email);
-        }
-
-        #endregion
     }
 }

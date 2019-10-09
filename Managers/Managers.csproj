@@ -57,6 +57,10 @@
       <Project>{726ED771-CCCA-4949-A94C-F081DC05728D}</Project>
       <Name>TimerServerInterface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WcfService1\TimerWCFService.csproj">
+      <Project>{1890C839-2AB5-44AB-BE31-92FCE9296D87}</Project>
+      <Name>TimerWCFService</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

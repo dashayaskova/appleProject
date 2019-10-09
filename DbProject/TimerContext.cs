@@ -10,9 +10,10 @@ namespace appleTimer.DbProject
 	{
 		public TimerContext() : base("DB")
 		{
-			Database.SetInitializer(new MigrateDatabaseToLatestVersion<TimerContext, Configuration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<TimerContext, Configuration>());
+            Configuration.ProxyCreationEnabled = false;
 		}
-
+        
 		public DbSet<User> Users { get; set; }
 		public DbSet<Record> Records { get; set; }
 		public DbSet<Group> Groups { get; set; }

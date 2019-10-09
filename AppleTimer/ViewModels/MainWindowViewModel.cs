@@ -3,11 +3,13 @@ using AppleTimer.Tools;
 using AppleTimer.Tools.Managers;
 using appleTimer.DbProject;
 using System.Linq;
-using Managers;
 using DbModels.Models;
 using System;
 using Providers;
 using System.Web.UI;
+using AppleTimer.TimerServer;
+using System.ServiceModel;
+using Managers;
 
 namespace AppleTimer.ViewModels
 {
@@ -44,16 +46,13 @@ namespace AppleTimer.ViewModels
         {
             LoaderManeger.Instance.Initialize(this);
 
-			//StationManager.Records = DbManager.GetUserRecords(new User() { Id = new Guid("DF215E10-8BD4-4401-B2DC-99BB03135F2E") });
+            using (var myChannelFactory = new ChannelFactory<ITimerServer>("BasicHttpBinding_ITimerServer"))
+            {
+                ITimerServer client = myChannelFactory.CreateChannel();
+                client.UserExists("bla");
+            }
 
-			//using (var context = new EFDBProvider())
-			//{
-			//	//StationManager.Records = context.SelectAll<Record>()
-			//	StationManager.Groups = context.SelectAll<Group>().ToList();
-			//}
-			var serv = new TimerServer.TimerServerClient("TimerServerWCF");
-            serv.UserExists("not_valid");
-
-		}
+            DBManager.UserExists("blo");
+        }
 	}
 }

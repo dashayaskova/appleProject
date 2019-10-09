@@ -29,3 +29,4 @@ C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\obj\Debug\DbProject.c
 C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\obj\Debug\DbProject.csproj.CopyComplete
 C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\obj\Debug\DbProject.dll
 C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\obj\Debug\DbProject.pdb
+C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\bin\Debug\DbModels.dll.config

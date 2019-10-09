@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using DbModels.Models;
 using TimerServerInterface;
 
@@ -11,11 +7,11 @@ namespace Interface
 {
     public class TimerServerWrapper
     {
-        private const string _timerEndpointName = "TimerServerWCF";
+        private const string _timerEndpointName = "BasicHttpBinding_ITimerServer";
 
         public static bool UserExists(string login)
         {
-            using (var myChannelFactory = new ChannelFactory<ITimerServer>(_timerEndpointName))
+            using (var myChannelFactory = new ChannelFactory<ITimerServer>("BasicHttpBinding_ITimerServer"))
             {
                 ITimerServer client = myChannelFactory.CreateChannel();
                 return client.UserExists(login);
