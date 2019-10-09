@@ -4,6 +4,7 @@ using DbModels.Models;
 using AppleTimer.Tools;
 using AppleTimer.Tools.Managers;
 using AppleTimer.Tools.Navigation;
+using System.Threading.Tasks;
 
 namespace AppleTimer.ViewModels
 {
@@ -50,16 +51,26 @@ namespace AppleTimer.ViewModels
 
         #endregion
 
-        private void DoSignUp(PasswordBox pb)
+        private async void DoSignUp(PasswordBox pb)
         {
-            User user = new User();
-            user.Username = Username;
+            User user = new User(Username, Email, pb.Password);
             user.Name = Name;
             user.Surname = Surname;
-            user.Email = Email;
-            user.Password = pb.Password;
 
-            //DBManager.AddUser(user);
+            LoaderManager.Instance.ShowLoader();
+
+            await Task.Run(() =>
+            {
+                using (var serv = new TimerService.TimerServerClient(StationManager.EndpointName))
+                {
+                    serv.AddUser(user);
+                }
+            });
+
+            LoaderManager.Instance.HideLoader();
+
+            StationManager.CurrentUser = user;
+            NavigationManager.Instance.Navigate(ViewType.MainView);
         }
     }
 }

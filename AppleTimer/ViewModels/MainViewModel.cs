@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Data;
+using AppleTimer.Tools.Navigation;
 
 namespace AppleTimer.ViewModels
 {
@@ -48,10 +49,10 @@ namespace AppleTimer.ViewModels
 		public int seconds = 0;
 
 		private RelayCommand<object> _startCommand;
-
-		private RelayCommand<object> _stopCommand;
-
+        private RelayCommand<object> _stopCommand;
 		private RelayCommand<object> _pauseCommand;
+
+		private RelayCommand<object> _logoutCommand;
 
 		public RelayCommand<object> Start
 		{
@@ -94,7 +95,14 @@ namespace AppleTimer.ViewModels
 			}
 		}
 
-		private void StartImplementation()
+        public RelayCommand<object> LogoutCommand
+        {
+            get
+            {
+                return _logoutCommand ?? (_logoutCommand = new RelayCommand<object>(DoLogout));
+            }
+        }
+        private void StartImplementation()
 		{
 			if (_isPause)
 			{
@@ -116,5 +124,12 @@ namespace AppleTimer.ViewModels
 		{
 			Time = TimeSpan.FromSeconds(++seconds).ToString(@"hh\:mm\:ss");
 		}
+
+        private void DoLogout(object obj)
+        {
+            StationManager.CurrentUser = null;
+
+            NavigationManager.Instance.Navigate(ViewType.LoginView);
+        }
 	}
 }

@@ -9,21 +9,21 @@ namespace Interface
     {
         private const string _timerEndpointName = "BasicHttpBinding_ITimerServer";
 
-        public static bool UserExists(string login)
+        public static bool UserExists(string username, string password)
         {
             using (var myChannelFactory = new ChannelFactory<ITimerServer>("BasicHttpBinding_ITimerServer"))
             {
                 ITimerServer client = myChannelFactory.CreateChannel();
-                return client.UserExists(login);
+                return client.UserExists(username, password);
             }
         }
 
-        public static User GetUserByUsername(string username)
+        public static User GetUser(string username, string password)
         {
             using (var myChannelFactory = new ChannelFactory<ITimerServer>(_timerEndpointName))
             {
                 ITimerServer client = myChannelFactory.CreateChannel();
-                return client.GetUserByUsername(username);
+                return client.GetUser(username, password);
             }
         }
 

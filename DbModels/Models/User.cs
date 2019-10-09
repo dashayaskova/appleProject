@@ -31,5 +31,18 @@ namespace DbModels.Models
 
 		public List<Group> Groups { get => _groups; set => _groups = value; }
 		public List<Record> Records { get => _records; set => _records = value; }
-	}
+
+        public User()
+        {
+
+        }
+
+        public User(string username, string email, string password)
+        {
+            _id = Guid.NewGuid();
+            _email = email;
+            _username = username;
+            _password = password;
+        }
+    }
 }

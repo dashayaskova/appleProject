@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using AppleTimer.Tools;
 using AppleTimer.Tools.Managers;
 using AppleTimer.Tools.Navigation;
+using DbModels.Models;
 
 namespace AppleTimer.ViewModels
 {
@@ -32,10 +35,7 @@ namespace AppleTimer.ViewModels
         {
             get
             {
-                return _loginCommand ?? (_loginCommand = new RelayCommand<PasswordBox>(pb =>
-                {
-					NavigationManager.Instance.Navigate(ViewType.MainView);
-				}, pb => !String.IsNullOrEmpty(pb.Password) && !String.IsNullOrEmpty(Username)));
+                return _loginCommand ?? (_loginCommand = new RelayCommand<PasswordBox>(DoLogin, pb => !String.IsNullOrEmpty(pb.Password) && !String.IsNullOrEmpty(Username)));
             }
         }
 
@@ -44,5 +44,34 @@ namespace AppleTimer.ViewModels
 
 
         #endregion
+        private async void DoLogin(PasswordBox pb)
+        {
+            LoaderManager.Instance.ShowLoader();
+
+            var result = await Task.Run(() =>
+            {
+                using (var serv = new TimerService.TimerServerClient(StationManager.EndpointName))
+                {
+                    if (!serv.UserExists(Username, pb.Password))
+                    {
+                        return null;
+                    }
+
+                    return serv.GetUser(Username, pb.Password);
+                }
+            });
+            LoaderManager.Instance.HideLoader();
+
+            if (result == null)
+            {
+                MessageBox.Show("Oooops. Couldn't find you.");
+            }
+            else
+            {
+                StationManager.CurrentUser = result;
+                NavigationManager.Instance.Navigate(ViewType.MainView);
+            }
+        }
+
     }
 }

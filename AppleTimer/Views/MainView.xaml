@@ -37,6 +37,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -44,28 +45,33 @@
         </Grid.RowDefinitions>
 
 
-        <DataGrid Grid.RowSpan="4" ItemsSource="{Binding ViewSource.View}" AutoGenerateColumns="False" BorderThickness="0">
+        <DataGrid Grid.RowSpan="5" ItemsSource="{Binding ViewSource.View}" AutoGenerateColumns="False" BorderThickness="0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Comment" Binding="{Binding Comment}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Time" Binding="{Binding Duration}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 
+        <Button Grid.Column="3" Grid.Row="0"
+                Margin="10 5"
+                HorizontalAlignment="Right"
+                Command="{Binding LogoutCommand}"
+                Content="Logout"/>
 
-
-        <local:RecordControlView Grid.Column="1" Grid.ColumnSpan="3"></local:RecordControlView>
-        <Label Margin="50 0" Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="1" Content="{Binding Time}" FontSize="95"></Label>
-        <Button  BorderThickness="0" Grid.Row="2" Grid.Column="1" Margin="80 10 10 10" Command="{Binding Start}">
+        <local:RecordControlView Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1"/>
+        <Label Margin="50 0" Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="1" 
+               Content="{Binding Time}" FontSize="95"></Label>
+        <Button  BorderThickness="0" Grid.Row="3" Grid.Column="1" Margin="80 10 10 10" Command="{Binding Start}">
             <Button.Background>
                 <ImageBrush ImageSource="../Images/play-button.png"></ImageBrush>
             </Button.Background>
         </Button>
-        <Button BorderThickness="0" Grid.Row="2" Grid.Column="2" Margin="45 10 45 10" Command="{Binding Pause}" >
+        <Button BorderThickness="0" Grid.Row="3" Grid.Column="2" Margin="45 10 45 10" Command="{Binding Pause}" >
             <Button.Background>
                 <ImageBrush ImageSource="../Images/pause-button.png"></ImageBrush>
             </Button.Background>
         </Button>
-        <Button BorderThickness="0" Grid.Row="2" Grid.Column="3" Margin="10 10 80 10" Command="{Binding Stop}">
+        <Button BorderThickness="0" Grid.Row="3" Grid.Column="3" Margin="10 10 80 10" Command="{Binding Stop}">
             <Button.Background>
                 <ImageBrush ImageSource="../Images/stop-button.png"></ImageBrush>
             </Button.Background>

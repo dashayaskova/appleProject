@@ -33,19 +33,19 @@ namespace DbProject
 			}
 		}
 
-        public static bool UserExists(string username)
+        public static bool UserExists(string username, string password)
         {
             using (var context = new TimerContext())
             {
-                return context.Users.Any(u => u.Username == username);
+                return context.Users.Any(u => u.Username == username && u.Password == password);
             }
         }
 
-        public static User GetUserByUsername(string username)
+        public static User GetUser(string username, string password)
         {
             using (var context = new TimerContext())
             {
-                return context.Users.FirstOrDefault(u => u.Username == username);
+                return context.Users.FirstOrDefault(u => u.Username == username && u.Password == password);
             }
         }
 

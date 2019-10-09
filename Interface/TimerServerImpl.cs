@@ -11,14 +11,14 @@ namespace AppleTimer.Server.TimerServerInterface
 {
 	public class TimerServerImpl : ITimerServer
 	{
-        public bool UserExists(string username)
+        public bool UserExists(string username, string password)
         {
-            return EntityWrapper.UserExists(username);
+            return EntityWrapper.UserExists(username, password);
         }
 
-        public User GetUserByUsername(string username)
+        public User GetUser(string username, string password)
         {
-            return EntityWrapper.GetUserByUsername(username);
+            return EntityWrapper.GetUser(username, password);
         }
 
         public User GetUserByGuid(Guid guid)

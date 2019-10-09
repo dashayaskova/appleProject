@@ -21,14 +21,14 @@ namespace WcfService1
            return  _service.GetUserByGuid(guid);
         }
 
-        public User GetUserByUsername(string username)
+        public User GetUser(string username, string password)
         {
-            return _service.GetUserByUsername(username);
+            return _service.GetUser(username, password);
         }
 
-        public bool UserExists(string username)
+        public bool UserExists(string username, string password)
         {
-            return _service.UserExists(username);
+            return _service.UserExists(username, password);
         }
     }
 }

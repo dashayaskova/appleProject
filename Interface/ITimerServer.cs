@@ -11,10 +11,10 @@ namespace TimerServerInterface
         #region UserMethods
 
         [OperationContract]
-        bool UserExists(string username);
+        bool UserExists(string username, string password);
 
         [OperationContract]
-        User GetUserByUsername(string username);
+        User GetUser(string username, string password);
 
         [OperationContract]
         User GetUserByGuid(Guid guid);

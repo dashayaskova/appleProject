@@ -8,24 +8,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AppleTimer.TimerServer {
+namespace AppleTimer.TimerService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="TimerServer.ITimerServer")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="TimerService.ITimerServer")]
     public interface ITimerServer {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITimerServer/UserExists", ReplyAction="http://tempuri.org/ITimerServer/UserExistsResponse")]
-        bool UserExists(string username);
+        bool UserExists(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITimerServer/UserExists", ReplyAction="http://tempuri.org/ITimerServer/UserExistsResponse")]
-        System.Threading.Tasks.Task<bool> UserExistsAsync(string username);
+        System.Threading.Tasks.Task<bool> UserExistsAsync(string username, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITimerServer/GetUserByUsername", ReplyAction="http://tempuri.org/ITimerServer/GetUserByUsernameResponse")]
-        DbModels.Models.User GetUserByUsername(string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITimerServer/GetUser", ReplyAction="http://tempuri.org/ITimerServer/GetUserResponse")]
+        DbModels.Models.User GetUser(string username, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITimerServer/GetUserByUsername", ReplyAction="http://tempuri.org/ITimerServer/GetUserByUsernameResponse")]
-        System.Threading.Tasks.Task<DbModels.Models.User> GetUserByUsernameAsync(string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITimerServer/GetUser", ReplyAction="http://tempuri.org/ITimerServer/GetUserResponse")]
+        System.Threading.Tasks.Task<DbModels.Models.User> GetUserAsync(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITimerServer/GetUserByGuid", ReplyAction="http://tempuri.org/ITimerServer/GetUserByGuidResponse")]
         DbModels.Models.User GetUserByGuid(System.Guid guid);
@@ -41,12 +41,12 @@ namespace AppleTimer.TimerServer {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ITimerServerChannel : AppleTimer.TimerServer.ITimerServer, System.ServiceModel.IClientChannel {
+    public interface ITimerServerChannel : AppleTimer.TimerService.ITimerServer, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class TimerServerClient : System.ServiceModel.ClientBase<AppleTimer.TimerServer.ITimerServer>, AppleTimer.TimerServer.ITimerServer {
+    public partial class TimerServerClient : System.ServiceModel.ClientBase<AppleTimer.TimerService.ITimerServer>, AppleTimer.TimerService.ITimerServer {
         
         public TimerServerClient() {
         }
@@ -67,20 +67,20 @@ namespace AppleTimer.TimerServer {
                 base(binding, remoteAddress) {
         }
         
-        public bool UserExists(string username) {
-            return base.Channel.UserExists(username);
+        public bool UserExists(string username, string password) {
+            return base.Channel.UserExists(username, password);
         }
         
-        public System.Threading.Tasks.Task<bool> UserExistsAsync(string username) {
-            return base.Channel.UserExistsAsync(username);
+        public System.Threading.Tasks.Task<bool> UserExistsAsync(string username, string password) {
+            return base.Channel.UserExistsAsync(username, password);
         }
         
-        public DbModels.Models.User GetUserByUsername(string username) {
-            return base.Channel.GetUserByUsername(username);
+        public DbModels.Models.User GetUser(string username, string password) {
+            return base.Channel.GetUser(username, password);
         }
         
-        public System.Threading.Tasks.Task<DbModels.Models.User> GetUserByUsernameAsync(string username) {
-            return base.Channel.GetUserByUsernameAsync(username);
+        public System.Threading.Tasks.Task<DbModels.Models.User> GetUserAsync(string username, string password) {
+            return base.Channel.GetUserAsync(username, password);
         }
         
         public DbModels.Models.User GetUserByGuid(System.Guid guid) {

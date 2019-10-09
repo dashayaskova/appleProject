@@ -5,14 +5,14 @@ namespace Managers
 {
     public class DBManager
     {
-        public static bool UserExists(string login)
+        public static bool UserExists(string username, string password)
         {
-            return TimerServerWrapper.UserExists(login);
+            return TimerServerWrapper.UserExists(username, password);
         }
 
-        public static User GetUserByUsername(string username)
+        public static User GetUserByUsername(string username, string password)
         {
-            return TimerServerWrapper.GetUserByUsername(username);
+            return TimerServerWrapper.GetUser(username, password);
         }
 
         public static void AddUser(User user)

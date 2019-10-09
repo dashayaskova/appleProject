@@ -85,7 +85,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Connected Services\TimerServer\Reference.cs">
+    <Compile Include="Connected Services\TimerService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -182,17 +182,17 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\TimerServer\TimerService.wsdl" />
-    <None Include="Connected Services\TimerServer\TimerService.xsd">
+    <None Include="Connected Services\TimerService\TimerService.wsdl" />
+    <None Include="Connected Services\TimerService\TimerService.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\TimerServer\TimerService1.xsd">
+    <None Include="Connected Services\TimerService\TimerService1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\TimerServer\TimerService2.xsd">
+    <None Include="Connected Services\TimerService\TimerService2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\TimerServer\TimerService3.xsd">
+    <None Include="Connected Services\TimerService\TimerService3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
@@ -240,19 +240,19 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\TimerServer\" />
+    <WCFMetadataStorage Include="Connected Services\TimerService\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\TimerServer\TimerService.disco" />
+    <None Include="Connected Services\TimerService\TimerService.disco" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\TimerServer\configuration91.svcinfo" />
+    <None Include="Connected Services\TimerService\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\TimerServer\configuration.svcinfo" />
+    <None Include="Connected Services\TimerService\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\TimerServer\Reference.svcmap">
+    <None Include="Connected Services\TimerService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

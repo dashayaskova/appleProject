@@ -1,15 +1,6 @@
 ﻿using System.Windows;
 using AppleTimer.Tools;
 using AppleTimer.Tools.Managers;
-using appleTimer.DbProject;
-using System.Linq;
-using DbModels.Models;
-using System;
-using Providers;
-using System.Web.UI;
-using AppleTimer.TimerServer;
-using System.ServiceModel;
-using Managers;
 
 namespace AppleTimer.ViewModels
 {
@@ -44,15 +35,7 @@ namespace AppleTimer.ViewModels
 
         public MainWindowViewModel()
         {
-            LoaderManeger.Instance.Initialize(this);
-
-            using (var myChannelFactory = new ChannelFactory<ITimerServer>("BasicHttpBinding_ITimerServer"))
-            {
-                ITimerServer client = myChannelFactory.CreateChannel();
-                client.UserExists("bla");
-            }
-
-            DBManager.UserExists("blo");
+            LoaderManager.Instance.Initialize(this); 
         }
 	}
 }

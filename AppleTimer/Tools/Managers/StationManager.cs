@@ -5,7 +5,11 @@ namespace AppleTimer.Tools.Managers
 {
 	static class StationManager
 	{
-		public static bool IsWindow { get; set; } = false;
+        public static string EndpointName = "TimerServerWCF";
+
+        public static bool IsWindow { get; set; } = false;
+
+        public static User CurrentUser { get; set; }
 		public static Group CurGroup { get; set; }
 		public static Record CurRecord { get; set; } = new Record();
 		public static List<Record> Records { get; set; }
