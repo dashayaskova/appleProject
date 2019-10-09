@@ -4,7 +4,7 @@ using System.Windows.Media;
 
 namespace DbModels.Models
 {
-    public class Group
+    public class Group : IDBModel
     {
         #region Fields
 

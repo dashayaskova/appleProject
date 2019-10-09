@@ -4,12 +4,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.29001.49
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppleTimer", "AppleTimer\AppleTimer.csproj", "{26732D46-33C5-4812-9E75-1068826F60FD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1890C839-2AB5-44AB-BE31-92FCE9296D87} = {1890C839-2AB5-44AB-BE31-92FCE9296D87}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbProject", "DbProject\DbProject.csproj", "{1F195594-DFE3-4515-83F9-CC43C2BF3B29}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbModels", "DbModels\DbModels.csproj", "{3AAED2BC-B099-4B29-B33B-801F38ABAF15}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Managers", "Managers\Managers.csproj", "{D3AA5B1A-663E-49B9-A9AB-CC8A2C30A929}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Providers", "Providers\Providers.csproj", "{CC9E5A15-4189-443F-BB43-42EB38E2E329}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tools", "Tools\Tools.csproj", "{B0D4729E-CC91-4985-A78D-148AEA819257}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{A604250A-C62F-4245-943E-A075C25F5FB0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimerServerInterface", "TimerServerInterface\TimerServerInterface.csproj", "{D76DE9F4-D7EF-4E2D-889D-70E771F739F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimerWCFService", "WcfService1\TimerWCFService.csproj", "{1890C839-2AB5-44AB-BE31-92FCE9296D87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface", "Interface\Interface.csproj", "{726ED771-CCCA-4949-A94C-F081DC05728D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,9 +48,34 @@ Global
 		{D3AA5B1A-663E-49B9-A9AB-CC8A2C30A929}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3AA5B1A-663E-49B9-A9AB-CC8A2C30A929}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3AA5B1A-663E-49B9-A9AB-CC8A2C30A929}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC9E5A15-4189-443F-BB43-42EB38E2E329}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC9E5A15-4189-443F-BB43-42EB38E2E329}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC9E5A15-4189-443F-BB43-42EB38E2E329}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC9E5A15-4189-443F-BB43-42EB38E2E329}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0D4729E-CC91-4985-A78D-148AEA819257}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0D4729E-CC91-4985-A78D-148AEA819257}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0D4729E-CC91-4985-A78D-148AEA819257}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0D4729E-CC91-4985-A78D-148AEA819257}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D76DE9F4-D7EF-4E2D-889D-70E771F739F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D76DE9F4-D7EF-4E2D-889D-70E771F739F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D76DE9F4-D7EF-4E2D-889D-70E771F739F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D76DE9F4-D7EF-4E2D-889D-70E771F739F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1890C839-2AB5-44AB-BE31-92FCE9296D87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1890C839-2AB5-44AB-BE31-92FCE9296D87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1890C839-2AB5-44AB-BE31-92FCE9296D87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1890C839-2AB5-44AB-BE31-92FCE9296D87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{726ED771-CCCA-4949-A94C-F081DC05728D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{726ED771-CCCA-4949-A94C-F081DC05728D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{726ED771-CCCA-4949-A94C-F081DC05728D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{726ED771-CCCA-4949-A94C-F081DC05728D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D76DE9F4-D7EF-4E2D-889D-70E771F739F9} = {A604250A-C62F-4245-943E-A075C25F5FB0}
+		{1890C839-2AB5-44AB-BE31-92FCE9296D87} = {A604250A-C62F-4245-943E-A075C25F5FB0}
+		{726ED771-CCCA-4949-A94C-F081DC05728D} = {A604250A-C62F-4245-943E-A075C25F5FB0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3387DAAF-AFCE-4189-B857-1DC9DD9DAC66}

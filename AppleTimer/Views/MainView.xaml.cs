@@ -13,6 +13,8 @@ namespace AppleTimer.Views
 		{
 			InitializeComponent();
 			DataContext = new MainViewModel();
+
+
 		}
 	}
 }

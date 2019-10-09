@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3AAED2BC-B099-4B29-B33B-801F38ABAF15}</ProjectGuid>
+    <ProjectGuid>{726ED771-CCCA-4949-A94C-F081DC05728D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DbModels</RootNamespace>
-    <AssemblyName>DbModels</AssemblyName>
+    <RootNamespace>Interface</RootNamespace>
+    <AssemblyName>Interface</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -31,10 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,11 +42,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Group.cs" />
-    <Compile Include="Models\IDBModel.cs" />
-    <Compile Include="Models\Record.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="ITimerServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimerServerImpl.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DbModels\DbModels.csproj">
+      <Project>{3AAED2BC-B099-4B29-B33B-801F38ABAF15}</Project>
+      <Name>DbModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Providers\Providers.csproj">
+      <Project>{CC9E5A15-4189-443F-BB43-42EB38E2E329}</Project>
+      <Name>Providers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tools\Tools.csproj">
+      <Project>{B0D4729E-CC91-4985-A78D-148AEA819257}</Project>
+      <Name>Tools</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

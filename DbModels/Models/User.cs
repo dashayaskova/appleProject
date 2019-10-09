@@ -1,18 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace DbModels.Models
 {
-    public class User
-    {
-        public Guid Id { get; set; }
-        public String Username { get; set; }
-        public String Name { get; set; }
-        public String Surname { get; set; }
-        public String Email { get; set; }
-        public String Password { get; set; }
+	[DataContract]
+	public class User : IDBModel
+	{
+		[DataMember]
+		private Guid _id;
+		[DataMember]
+		private string _username;
+		[DataMember]
+		private string _name;
+		[DataMember]
+		private string _email;
+		[DataMember]
+		private string _password;
+		[DataMember]
+		private List<Group> _groups;
+		[DataMember]
+		private List<Record> _records;
 
-        public List<Group> Groups { get; set; }
-        public List<Record> Records { get; set; }
-    }
+		public Guid Id { get => _id; set => _id = value; }
+		public String Username { get => _username; set => _username = value; }
+		public String Name { get => _name; set => _name = value; }
+		public String Surname { get; set; }
+		public String Email { get => _email; set => _email = value; }
+		public String Password { get => _password; set => _password = value; }
+
+		public List<Group> Groups { get => _groups; set => _groups = value; }
+		public List<Record> Records { get => _records; set => _records = value; }
+	}
 }

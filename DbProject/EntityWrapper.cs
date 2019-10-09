@@ -14,5 +14,22 @@ namespace DbProject
 				return context.Records.Where(o => o.UserId == user.Id).ToList();
 			}
 		}
+
+		public static List<Group> GetUserGroups(User user)
+		{
+			using (var context = new TimerContext())
+			{
+				return context.Groups.Where(o => o.UserId == user.Id).ToList();
+			}
+		}
+
+		public static void AddRecord(Record record)
+		{
+			using (var context = new TimerContext())
+			{
+				context.Records.Add(record);
+				context.SaveChanges();
+			}
+		}
 	}
 }

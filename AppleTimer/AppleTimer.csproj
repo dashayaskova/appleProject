@@ -48,6 +48,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -82,6 +85,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Connected Services\TimerServer\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Tools\BaseViewModel.cs" />
     <Compile Include="Tools\ILoaderOwner.cs" />
     <Compile Include="Tools\Managers\LoaderManager.cs" />
@@ -174,7 +182,21 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\TimerServer\TimerService.wsdl" />
+    <None Include="Connected Services\TimerServer\TimerService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\TimerServer\TimerService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\TimerServer\TimerService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\TimerServer\TimerService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\DbModels.Models.User.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -201,6 +223,35 @@
       <Project>{d3aa5b1a-663e-49b9-a9ab-cc8a2c30a929}</Project>
       <Name>Managers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Providers\Providers.csproj">
+      <Project>{CC9E5A15-4189-443F-BB43-42EB38E2E329}</Project>
+      <Name>Providers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TimerServerInterface\TimerServerInterface.csproj">
+      <Project>{d76de9f4-d7ef-4e2d-889d-70e771f739f9}</Project>
+      <Name>TimerServerInterface</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\TimerServer\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TimerServer\TimerService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TimerServer\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TimerServer\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TimerServer\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

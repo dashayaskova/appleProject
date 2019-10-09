@@ -6,6 +6,8 @@ using System.Linq;
 using Managers;
 using DbModels.Models;
 using System;
+using Providers;
+using System.Web.UI;
 
 namespace AppleTimer.ViewModels
 {
@@ -42,12 +44,16 @@ namespace AppleTimer.ViewModels
         {
             LoaderManeger.Instance.Initialize(this);
 
-			StationManager.Records = DbManager.GetUserRecords(new User() { Id = new Guid("DF215E10-8BD4-4401-B2DC-99BB03135F2E") });
+			//StationManager.Records = DbManager.GetUserRecords(new User() { Id = new Guid("DF215E10-8BD4-4401-B2DC-99BB03135F2E") });
 
-			using (var context = new TimerContext())
-			{
-				StationManager.Groups = context.Groups.ToList();
-			}
-        }
-    }
+			//using (var context = new EFDBProvider())
+			//{
+			//	//StationManager.Records = context.SelectAll<Record>()
+			//	StationManager.Groups = context.SelectAll<Group>().ToList();
+			//}
+			var serv = new TimerServer.TimerServerClient("TimerServerWCF");
+			var users = serv.GetAllUsers();
+
+		}
+	}
 }
