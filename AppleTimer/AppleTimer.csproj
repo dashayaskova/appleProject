@@ -227,10 +227,6 @@
       <Project>{CC9E5A15-4189-443F-BB43-42EB38E2E329}</Project>
       <Name>Providers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TimerServerInterface\TimerServerInterface.csproj">
-      <Project>{d76de9f4-d7ef-4e2d-889d-70e771f739f9}</Project>
-      <Name>TimerServerInterface</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

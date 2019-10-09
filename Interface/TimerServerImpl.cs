@@ -1,4 +1,7 @@
-﻿using DbModels.Models;
+﻿using appleTimer.DbProject;
+using DbModels.Models;
+using DbProject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TimerServerInterface;
@@ -8,20 +11,25 @@ namespace AppleTimer.Server.TimerServerInterface
 {
 	public class TimerServerImpl : ITimerServer
 	{
-		public void AddUser(User user)
-		{
-			using (var dbProvider = ProviderFactory.CreateNewDBProvider())
-			{
-				dbProvider.Add(user);
-			}
-		}
+        public bool UserExists(string username)
+        {
+            return EntityWrapper.UserExists(username);
+        }
 
-		public IEnumerable<User> GetAllUsers()
-		{
-			using (var dbProvider = ProviderFactory.CreateNewDBProvider())
-			{
-				return dbProvider.SelectAll<User>().ToList();
-			}
-		}
-	}
+        public User GetUserByUsername(string username)
+        {
+            return EntityWrapper.GetUserByUsername(username);
+        }
+
+        public User GetUserByGuid(Guid guid)
+        {
+            return EntityWrapper.GetUserByGuid(guid);
+        }
+
+        public void AddUser(User user)
+        {
+            EntityWrapper.AddUser(user);
+        }
+
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using appleTimer.DbProject;
 using DbModels.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -31,5 +32,40 @@ namespace DbProject
 				context.SaveChanges();
 			}
 		}
-	}
+
+        public static bool UserExists(string username)
+        {
+            using (var context = new TimerContext())
+            {
+                return context.Users.Any(u => u.Username == username);
+            }
+        }
+
+        public static User GetUserByUsername(string username)
+        {
+            using (var context = new TimerContext())
+            {
+                return context.Users.FirstOrDefault(u => u.Username == username);
+            }
+        }
+
+        public static User GetUserByGuid(Guid guid)
+        {
+            using (var context = new TimerContext())
+            {
+                return context.Users.FirstOrDefault(u => u.Id == guid);
+            }
+        }
+
+
+        public static void AddUser(User user)
+        {
+            using (var context = new TimerContext())
+            {
+                context.Users.Add(user);
+                context.SaveChanges();
+            }
+        }
+
+    }
 }

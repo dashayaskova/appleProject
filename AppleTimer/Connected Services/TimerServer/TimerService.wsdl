@@ -8,11 +8,23 @@
       <xsd:import schemaLocation="http://localhost:61856/TimerService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Windows.Media" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="ITimerServer_GetAllUsers_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllUsers" />
+  <wsdl:message name="ITimerServer_UserExists_InputMessage">
+    <wsdl:part name="parameters" element="tns:UserExists" />
   </wsdl:message>
-  <wsdl:message name="ITimerServer_GetAllUsers_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllUsersResponse" />
+  <wsdl:message name="ITimerServer_UserExists_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UserExistsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITimerServer_GetUserByUsername_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByUsername" />
+  </wsdl:message>
+  <wsdl:message name="ITimerServer_GetUserByUsername_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByUsernameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITimerServer_GetUserByGuid_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByGuid" />
+  </wsdl:message>
+  <wsdl:message name="ITimerServer_GetUserByGuid_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByGuidResponse" />
   </wsdl:message>
   <wsdl:message name="ITimerServer_AddUser_InputMessage">
     <wsdl:part name="parameters" element="tns:AddUser" />
@@ -21,9 +33,17 @@
     <wsdl:part name="parameters" element="tns:AddUserResponse" />
   </wsdl:message>
   <wsdl:portType name="ITimerServer">
-    <wsdl:operation name="GetAllUsers">
-      <wsdl:input wsaw:Action="http://tempuri.org/ITimerServer/GetAllUsers" message="tns:ITimerServer_GetAllUsers_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ITimerServer/GetAllUsersResponse" message="tns:ITimerServer_GetAllUsers_OutputMessage" />
+    <wsdl:operation name="UserExists">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITimerServer/UserExists" message="tns:ITimerServer_UserExists_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITimerServer/UserExistsResponse" message="tns:ITimerServer_UserExists_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByUsername">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITimerServer/GetUserByUsername" message="tns:ITimerServer_GetUserByUsername_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITimerServer/GetUserByUsernameResponse" message="tns:ITimerServer_GetUserByUsername_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByGuid">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITimerServer/GetUserByGuid" message="tns:ITimerServer_GetUserByGuid_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITimerServer/GetUserByGuidResponse" message="tns:ITimerServer_GetUserByGuid_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="AddUser">
       <wsdl:input wsaw:Action="http://tempuri.org/ITimerServer/AddUser" message="tns:ITimerServer_AddUser_InputMessage" />
@@ -32,8 +52,26 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ITimerServer" type="tns:ITimerServer">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GetAllUsers">
-      <soap:operation soapAction="http://tempuri.org/ITimerServer/GetAllUsers" style="document" />
+    <wsdl:operation name="UserExists">
+      <soap:operation soapAction="http://tempuri.org/ITimerServer/UserExists" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByUsername">
+      <soap:operation soapAction="http://tempuri.org/ITimerServer/GetUserByUsername" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByGuid">
+      <soap:operation soapAction="http://tempuri.org/ITimerServer/GetUserByGuid" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

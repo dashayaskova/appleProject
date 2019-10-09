@@ -52,7 +52,7 @@ namespace AppleTimer.ViewModels
 			//	StationManager.Groups = context.SelectAll<Group>().ToList();
 			//}
 			var serv = new TimerServer.TimerServerClient("TimerServerWCF");
-			var users = serv.GetAllUsers();
+            serv.UserExists("not_valid");
 
 		}
 	}

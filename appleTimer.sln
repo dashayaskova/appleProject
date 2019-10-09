@@ -20,11 +20,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tools", "Tools\Tools.csproj
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{A604250A-C62F-4245-943E-A075C25F5FB0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimerServerInterface", "TimerServerInterface\TimerServerInterface.csproj", "{D76DE9F4-D7EF-4E2D-889D-70E771F739F9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimerWCFService", "WcfService1\TimerWCFService.csproj", "{1890C839-2AB5-44AB-BE31-92FCE9296D87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface", "Interface\Interface.csproj", "{726ED771-CCCA-4949-A94C-F081DC05728D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimerServerInterface", "Interface\TimerServerInterface.csproj", "{726ED771-CCCA-4949-A94C-F081DC05728D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,10 +54,6 @@ Global
 		{B0D4729E-CC91-4985-A78D-148AEA819257}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0D4729E-CC91-4985-A78D-148AEA819257}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0D4729E-CC91-4985-A78D-148AEA819257}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D76DE9F4-D7EF-4E2D-889D-70E771F739F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D76DE9F4-D7EF-4E2D-889D-70E771F739F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D76DE9F4-D7EF-4E2D-889D-70E771F739F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D76DE9F4-D7EF-4E2D-889D-70E771F739F9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1890C839-2AB5-44AB-BE31-92FCE9296D87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1890C839-2AB5-44AB-BE31-92FCE9296D87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1890C839-2AB5-44AB-BE31-92FCE9296D87}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -73,7 +67,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{D76DE9F4-D7EF-4E2D-889D-70E771F739F9} = {A604250A-C62F-4245-943E-A075C25F5FB0}
 		{1890C839-2AB5-44AB-BE31-92FCE9296D87} = {A604250A-C62F-4245-943E-A075C25F5FB0}
 		{726ED771-CCCA-4949-A94C-F081DC05728D} = {A604250A-C62F-4245-943E-A075C25F5FB0}
 	EndGlobalSection

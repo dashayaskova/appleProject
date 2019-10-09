@@ -16,9 +16,19 @@ namespace WcfService1
 			_service.AddUser(user);
 		}
 
-		public IEnumerable<User> GetAllUsers()
-		{
-			return _service.GetAllUsers();
-		}
-	}
+        public User GetUserByGuid(Guid guid)
+        {
+           return  _service.GetUserByGuid(guid);
+        }
+
+        public User GetUserByUsername(string username)
+        {
+            return _service.GetUserByUsername(username);
+        }
+
+        public bool UserExists(string username)
+        {
+            return _service.UserExists(username);
+        }
+    }
 }

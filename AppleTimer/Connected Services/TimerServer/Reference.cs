@@ -15,11 +15,23 @@ namespace AppleTimer.TimerServer {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="TimerServer.ITimerServer")]
     public interface ITimerServer {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITimerServer/GetAllUsers", ReplyAction="http://tempuri.org/ITimerServer/GetAllUsersResponse")]
-        DbModels.Models.User[] GetAllUsers();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITimerServer/UserExists", ReplyAction="http://tempuri.org/ITimerServer/UserExistsResponse")]
+        bool UserExists(string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITimerServer/GetAllUsers", ReplyAction="http://tempuri.org/ITimerServer/GetAllUsersResponse")]
-        System.Threading.Tasks.Task<DbModels.Models.User[]> GetAllUsersAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITimerServer/UserExists", ReplyAction="http://tempuri.org/ITimerServer/UserExistsResponse")]
+        System.Threading.Tasks.Task<bool> UserExistsAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITimerServer/GetUserByUsername", ReplyAction="http://tempuri.org/ITimerServer/GetUserByUsernameResponse")]
+        DbModels.Models.User GetUserByUsername(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITimerServer/GetUserByUsername", ReplyAction="http://tempuri.org/ITimerServer/GetUserByUsernameResponse")]
+        System.Threading.Tasks.Task<DbModels.Models.User> GetUserByUsernameAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITimerServer/GetUserByGuid", ReplyAction="http://tempuri.org/ITimerServer/GetUserByGuidResponse")]
+        DbModels.Models.User GetUserByGuid(System.Guid guid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITimerServer/GetUserByGuid", ReplyAction="http://tempuri.org/ITimerServer/GetUserByGuidResponse")]
+        System.Threading.Tasks.Task<DbModels.Models.User> GetUserByGuidAsync(System.Guid guid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITimerServer/AddUser", ReplyAction="http://tempuri.org/ITimerServer/AddUserResponse")]
         void AddUser(DbModels.Models.User user);
@@ -55,12 +67,28 @@ namespace AppleTimer.TimerServer {
                 base(binding, remoteAddress) {
         }
         
-        public DbModels.Models.User[] GetAllUsers() {
-            return base.Channel.GetAllUsers();
+        public bool UserExists(string username) {
+            return base.Channel.UserExists(username);
         }
         
-        public System.Threading.Tasks.Task<DbModels.Models.User[]> GetAllUsersAsync() {
-            return base.Channel.GetAllUsersAsync();
+        public System.Threading.Tasks.Task<bool> UserExistsAsync(string username) {
+            return base.Channel.UserExistsAsync(username);
+        }
+        
+        public DbModels.Models.User GetUserByUsername(string username) {
+            return base.Channel.GetUserByUsername(username);
+        }
+        
+        public System.Threading.Tasks.Task<DbModels.Models.User> GetUserByUsernameAsync(string username) {
+            return base.Channel.GetUserByUsernameAsync(username);
+        }
+        
+        public DbModels.Models.User GetUserByGuid(System.Guid guid) {
+            return base.Channel.GetUserByGuid(guid);
+        }
+        
+        public System.Threading.Tasks.Task<DbModels.Models.User> GetUserByGuidAsync(System.Guid guid) {
+            return base.Channel.GetUserByGuidAsync(guid);
         }
         
         public void AddUser(DbModels.Models.User user) {
