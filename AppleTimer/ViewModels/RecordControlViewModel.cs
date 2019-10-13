@@ -2,7 +2,6 @@
 using AppleTimer.Tools;
 using AppleTimer.Tools.Managers;
 using AppleTimer.Views.Windows;
-using System.Collections.Generic;
 using System.Windows.Data;
 
 namespace AppleTimer.ViewModels
@@ -10,8 +9,17 @@ namespace AppleTimer.ViewModels
 	class RecordControlViewModel : BaseViewModel
 	{
 
-		private Record _record { get; set; }
-		public Record CurrentRecord
+        #region Fields
+
+        private Record _record { get; set; }
+        private RelayCommand<object> _addGroupCommand;
+
+
+        #endregion
+
+        #region Props
+
+        public Record CurrentRecord
 		{
 			get { return _record; }
 			set
@@ -20,14 +28,23 @@ namespace AppleTimer.ViewModels
 				OnPropertyChanged();
 			}
 		}
-		public List<Group> Groups { get; set; }
 
 		public CollectionViewSource ViewSource { get; set; } = new CollectionViewSource();
 
-		public RecordControlViewModel()
+        public RelayCommand<object> AddGroup
+        {
+            get
+            {
+                return _addGroupCommand ?? (_addGroupCommand = new RelayCommand<object>(
+                     o => AddGroupImplementation()));
+            }
+        }
+
+        #endregion
+
+        public RecordControlViewModel()
 		{
-			Groups = StationManager.Groups;
-			ViewSource.Source = Groups;
+			ViewSource.Source = StationManager.CurrentUser.Groups;
 
 			if (StationManager.IsWindow)
 			{
@@ -36,29 +53,10 @@ namespace AppleTimer.ViewModels
 			else
 			{
 				StationManager.IsWindow = true;
-				CurrentRecord = new Record();
-
-				StationManager.ShowWindow += () =>
-				{
-					StationManager.CurRecord = CurrentRecord;
-				};
-
 				StationManager.CleanRecords += () =>
 				{
-					CurrentRecord = new Record();
+                    CurrentRecord = null;
 				};
-			}
-		}
-
-		private RelayCommand<object> _addGroupCommand;
-
-
-		public RelayCommand<object> AddGroup
-		{
-			get
-			{
-				return _addGroupCommand ?? (_addGroupCommand = new RelayCommand<object>(
-					 o => AddGroupImplementation()));
 			}
 		}
 
@@ -67,7 +65,7 @@ namespace AppleTimer.ViewModels
 			StationManager.CurGroup = new Group();
 			AddGroupWindowView win = new AddGroupWindowView();
 			win.ShowDialog();
-			Groups.Add(StationManager.CurGroup);
+			StationManager.CurrentUser.Groups.Add(StationManager.CurGroup);
 			ViewSource.View.Refresh();
 		}
 

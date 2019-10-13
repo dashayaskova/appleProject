@@ -11,7 +11,7 @@ namespace AppleTimer.Tools.Managers
 
         public static User CurrentUser { get; set; }
 		public static Group CurGroup { get; set; }
-		public static Record CurRecord { get; set; } = new Record();
+		public static Record CurRecord { get; set; }
 		public static List<Record> Records { get; set; }
 		public static List<Group> Groups { get; set; }
 

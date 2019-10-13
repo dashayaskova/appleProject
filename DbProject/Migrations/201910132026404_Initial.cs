@@ -3,7 +3,7 @@ namespace DbProject.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class FirstMigration : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -27,10 +27,10 @@ namespace DbProject.Migrations
                         id = c.Guid(nullable: false),
                         UserId = c.Guid(nullable: false),
                         start_time = c.DateTime(nullable: false),
-                        duration = c.Long(nullable: false),
-                        endTime = c.DateTime(nullable: false),
+                        duration = c.Long(),
+                        endTime = c.DateTime(),
                         comment = c.String(),
-                        GroupId = c.Guid(nullable: false),
+                        GroupId = c.Guid(),
                     })
                 .PrimaryKey(t => t.id)
                 .ForeignKey("dbo.group", t => t.GroupId)

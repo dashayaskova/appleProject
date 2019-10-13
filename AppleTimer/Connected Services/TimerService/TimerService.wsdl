@@ -6,6 +6,7 @@
       <xsd:import schemaLocation="http://localhost:61856/TimerService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:61856/TimerService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DbModels.Models" />
       <xsd:import schemaLocation="http://localhost:61856/TimerService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Windows.Media" />
+      <xsd:import schemaLocation="http://localhost:61856/TimerService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ITimerServer_UserExists_InputMessage">
@@ -20,17 +21,77 @@
   <wsdl:message name="ITimerServer_GetUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetUserResponse" />
   </wsdl:message>
-  <wsdl:message name="ITimerServer_GetUserByGuid_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetUserByGuid" />
-  </wsdl:message>
-  <wsdl:message name="ITimerServer_GetUserByGuid_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetUserByGuidResponse" />
-  </wsdl:message>
   <wsdl:message name="ITimerServer_AddUser_InputMessage">
     <wsdl:part name="parameters" element="tns:AddUser" />
   </wsdl:message>
   <wsdl:message name="ITimerServer_AddUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITimerServer_UpdateUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUser" />
+  </wsdl:message>
+  <wsdl:message name="ITimerServer_UpdateUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITimerServer_GetUserRecords_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserRecords" />
+  </wsdl:message>
+  <wsdl:message name="ITimerServer_GetUserRecords_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserRecordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITimerServer_AddRecord_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddRecord" />
+  </wsdl:message>
+  <wsdl:message name="ITimerServer_AddRecord_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddRecordResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITimerServer_AddRecords_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddRecords" />
+  </wsdl:message>
+  <wsdl:message name="ITimerServer_AddRecords_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddRecordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITimerServer_DeleteRecords_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRecords" />
+  </wsdl:message>
+  <wsdl:message name="ITimerServer_DeleteRecords_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRecordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITimerServer_UpdateRecord_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRecord" />
+  </wsdl:message>
+  <wsdl:message name="ITimerServer_UpdateRecord_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRecordResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITimerServer_GetUserGroups_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserGroups" />
+  </wsdl:message>
+  <wsdl:message name="ITimerServer_GetUserGroups_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserGroupsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITimerServer_AddGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddGroup" />
+  </wsdl:message>
+  <wsdl:message name="ITimerServer_AddGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITimerServer_AddGroups_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddGroups" />
+  </wsdl:message>
+  <wsdl:message name="ITimerServer_AddGroups_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddGroupsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITimerServer_DeleteGroups_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteGroups" />
+  </wsdl:message>
+  <wsdl:message name="ITimerServer_DeleteGroups_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteGroupsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITimerServer_UpdateGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateGroup" />
+  </wsdl:message>
+  <wsdl:message name="ITimerServer_UpdateGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateGroupResponse" />
   </wsdl:message>
   <wsdl:portType name="ITimerServer">
     <wsdl:operation name="UserExists">
@@ -41,13 +102,53 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ITimerServer/GetUser" message="tns:ITimerServer_GetUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITimerServer/GetUserResponse" message="tns:ITimerServer_GetUser_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetUserByGuid">
-      <wsdl:input wsaw:Action="http://tempuri.org/ITimerServer/GetUserByGuid" message="tns:ITimerServer_GetUserByGuid_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ITimerServer/GetUserByGuidResponse" message="tns:ITimerServer_GetUserByGuid_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="AddUser">
       <wsdl:input wsaw:Action="http://tempuri.org/ITimerServer/AddUser" message="tns:ITimerServer_AddUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITimerServer/AddUserResponse" message="tns:ITimerServer_AddUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITimerServer/UpdateUser" message="tns:ITimerServer_UpdateUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITimerServer/UpdateUserResponse" message="tns:ITimerServer_UpdateUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserRecords">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITimerServer/GetUserRecords" message="tns:ITimerServer_GetUserRecords_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITimerServer/GetUserRecordsResponse" message="tns:ITimerServer_GetUserRecords_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddRecord">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITimerServer/AddRecord" message="tns:ITimerServer_AddRecord_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITimerServer/AddRecordResponse" message="tns:ITimerServer_AddRecord_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddRecords">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITimerServer/AddRecords" message="tns:ITimerServer_AddRecords_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITimerServer/AddRecordsResponse" message="tns:ITimerServer_AddRecords_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRecords">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITimerServer/DeleteRecords" message="tns:ITimerServer_DeleteRecords_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITimerServer/DeleteRecordsResponse" message="tns:ITimerServer_DeleteRecords_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRecord">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITimerServer/UpdateRecord" message="tns:ITimerServer_UpdateRecord_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITimerServer/UpdateRecordResponse" message="tns:ITimerServer_UpdateRecord_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserGroups">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITimerServer/GetUserGroups" message="tns:ITimerServer_GetUserGroups_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITimerServer/GetUserGroupsResponse" message="tns:ITimerServer_GetUserGroups_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITimerServer/AddGroup" message="tns:ITimerServer_AddGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITimerServer/AddGroupResponse" message="tns:ITimerServer_AddGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddGroups">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITimerServer/AddGroups" message="tns:ITimerServer_AddGroups_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITimerServer/AddGroupsResponse" message="tns:ITimerServer_AddGroups_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGroups">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITimerServer/DeleteGroups" message="tns:ITimerServer_DeleteGroups_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITimerServer/DeleteGroupsResponse" message="tns:ITimerServer_DeleteGroups_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITimerServer/UpdateGroup" message="tns:ITimerServer_UpdateGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITimerServer/UpdateGroupResponse" message="tns:ITimerServer_UpdateGroup_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ITimerServer" type="tns:ITimerServer">
@@ -70,8 +171,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetUserByGuid">
-      <soap:operation soapAction="http://tempuri.org/ITimerServer/GetUserByGuid" style="document" />
+    <wsdl:operation name="AddUser">
+      <soap:operation soapAction="http://tempuri.org/ITimerServer/AddUser" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -79,8 +180,98 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="AddUser">
-      <soap:operation soapAction="http://tempuri.org/ITimerServer/AddUser" style="document" />
+    <wsdl:operation name="UpdateUser">
+      <soap:operation soapAction="http://tempuri.org/ITimerServer/UpdateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserRecords">
+      <soap:operation soapAction="http://tempuri.org/ITimerServer/GetUserRecords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddRecord">
+      <soap:operation soapAction="http://tempuri.org/ITimerServer/AddRecord" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddRecords">
+      <soap:operation soapAction="http://tempuri.org/ITimerServer/AddRecords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRecords">
+      <soap:operation soapAction="http://tempuri.org/ITimerServer/DeleteRecords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRecord">
+      <soap:operation soapAction="http://tempuri.org/ITimerServer/UpdateRecord" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserGroups">
+      <soap:operation soapAction="http://tempuri.org/ITimerServer/GetUserGroups" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddGroup">
+      <soap:operation soapAction="http://tempuri.org/ITimerServer/AddGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddGroups">
+      <soap:operation soapAction="http://tempuri.org/ITimerServer/AddGroups" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGroups">
+      <soap:operation soapAction="http://tempuri.org/ITimerServer/DeleteGroups" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateGroup">
+      <soap:operation soapAction="http://tempuri.org/ITimerServer/UpdateGroup" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

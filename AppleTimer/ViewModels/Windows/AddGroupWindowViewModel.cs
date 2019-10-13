@@ -4,26 +4,30 @@ using AppleTimer.Tools.Managers;
 using System;
 using System.Windows;
 using System.Windows.Input;
+using System.Threading.Tasks;
 
 namespace AppleTimer.ViewModels.Windows
 {
 	class AddGroupWindowViewModel
 	{
-		public Group Group { get; set; }
 
 		public AddGroupWindowViewModel()
 		{
-			Group = new Group();
-		}
+            StationManager.CurGroup = new Group(StationManager.CurrentUser);
+            Group = StationManager.CurGroup;
+        }
 
-		#region Commands
+		#region Fields
 
 		private ICommand _saveCommand;
 		private ICommand _cancelCommand;
 
-		#endregion
+        #endregion
 
-		public ICommand CancelCommand
+        #region Props
+        public Group Group { get; set; }
+
+        public ICommand CancelCommand
 		{
 			get { return _cancelCommand ?? (_cancelCommand = new RelayCommand<Window>(w => w?.Close())); }
 		}
@@ -36,15 +40,30 @@ namespace AppleTimer.ViewModels.Windows
 			}
 		}
 
-		private bool CanExecuteCommand(Object o)
+        #endregion
+
+        private bool CanExecuteCommand(Object o)
 		{
 			return !String.IsNullOrEmpty(Group.Name) && Group.Color != null;
 		}
 
 		private void SaveImplementation(Window win)
 		{
-			StationManager.CurGroup = Group;
+            StationManager.CurrentUser.Groups.Add(Group);
+            SubmitNewGroup(Group);
 			win?.Close();
 		}
-	}
+
+        private async void SubmitNewGroup(Group group)
+        {
+            await Task.Run(() =>
+            {
+                using (var serv = new TimerService.TimerServerClient(StationManager.EndpointName))
+                {
+                    serv.AddGroup(group);
+                }
+            }
+            );
+        }
+    }
 }

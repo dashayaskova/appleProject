@@ -49,9 +49,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityWrapper.cs" />
-    <Compile Include="Migrations\201909191517191_FirstMigration.cs" />
-    <Compile Include="Migrations\201909191517191_FirstMigration.Designer.cs">
-      <DependentUpon>201909191517191_FirstMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201910132026404_Initial.cs" />
+    <Compile Include="Migrations\201910132026404_Initial.Designer.cs">
+      <DependentUpon>201910132026404_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910132100486_TimeFormat.cs" />
+    <Compile Include="Migrations\201910132100486_TimeFormat.Designer.cs">
+      <DependentUpon>201910132100486_TimeFormat.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfigurations\GroupConfiguration.cs" />
@@ -71,8 +75,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201909191517191_FirstMigration.resx">
-      <DependentUpon>201909191517191_FirstMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201910132026404_Initial.resx">
+      <DependentUpon>201910132026404_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910132100486_TimeFormat.resx">
+      <DependentUpon>201910132100486_TimeFormat.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -21,12 +21,13 @@ C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\bin\Debug\DbModels.dl
 C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\bin\Debug\EntityFramework.dll
 C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\bin\Debug\DbModels.pdb
+C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\bin\Debug\DbModels.dll.config
 C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\bin\Debug\EntityFramework.xml
 C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\obj\Debug\DbProject.csprojAssemblyReference.cache
-C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\obj\Debug\DbProject.Migrations.FirstMigration.resources
+C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\obj\Debug\DbProject.Migrations.Initial.resources
+C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\obj\Debug\DbProject.Migrations.TimeFormat.resources
 C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\obj\Debug\DbProject.csproj.GenerateResource.cache
 C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\obj\Debug\DbProject.csproj.CopyComplete
 C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\obj\Debug\DbProject.dll
 C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\obj\Debug\DbProject.pdb
-C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\bin\Debug\DbModels.dll.config

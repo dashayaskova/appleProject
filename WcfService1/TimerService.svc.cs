@@ -11,14 +11,11 @@ namespace WcfService1
 	public class TimerService : ITimerServer
 	{
 		private TimerServerImpl _service = new TimerServerImpl();
-		public void AddUser(User user)
-		{
-			_service.AddUser(user);
-		}
 
-        public User GetUserByGuid(Guid guid)
+        #region UserMethods
+        public bool UserExists(string username, string password)
         {
-           return  _service.GetUserByGuid(guid);
+            return _service.UserExists(username, password);
         }
 
         public User GetUser(string username, string password)
@@ -26,9 +23,72 @@ namespace WcfService1
             return _service.GetUser(username, password);
         }
 
-        public bool UserExists(string username, string password)
+        public void AddUser(User user)
         {
-            return _service.UserExists(username, password);
+            _service.AddUser(user);
         }
+
+        public void UpdateUser(User user, string[] update_fields)
+        {
+            _service.UpdateUser(user, update_fields);
+        }
+
+        #endregion
+
+        #region RecordMethods
+        public List<Record> GetUserRecords(User user)
+        {
+            return _service.GetUserRecords(user);
+        }
+
+        public void AddRecord(Record record)
+        {
+            _service.AddRecord(record);
+        }
+
+        public void AddRecords(List<Record> records)
+        {
+            _service.AddRecords(records);
+        }
+
+        public void DeleteRecords(List<Guid> recordIds)
+        {
+            _service.DeleteRecords(recordIds);
+        }
+        
+        public void UpdateRecord(Record record, string[] updateFields)
+        {
+            _service.UpdateRecord(record, updateFields);
+        }
+
+        #endregion
+
+        #region GroupMethods
+        public List<Group> GetUserGroups(User user)
+        {
+            return _service.GetUserGroups(user);
+        }
+
+        public void AddGroup(Group group)
+        {
+            _service.AddGroup(group);
+        }
+
+        public void AddGroups(List<Group> groups)
+        {
+            _service.AddGroups(groups);
+        }
+
+        public void DeleteGroups(List<Guid> groupIds)
+        {
+            _service.DeleteGroups(groupIds);
+        }
+
+        public void UpdateGroup(Group group, string[] updateFields)
+        {
+            _service.UpdateGroup(group, updateFields);
+        }
+
+        #endregion
     }
 }

@@ -8,13 +8,13 @@ namespace appleTimer.DbProject
 {
 	public class TimerContext:DbContext
 	{
-		public TimerContext() : base("DB")
-		{
+        public TimerContext() : base("DB")
+        {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<TimerContext, Configuration>());
             Configuration.ProxyCreationEnabled = false;
-		}
-        
-		public DbSet<User> Users { get; set; }
+        }
+
+        public DbSet<User> Users { get; set; }
 		public DbSet<Record> Records { get; set; }
 		public DbSet<Group> Groups { get; set; }
 
@@ -23,13 +23,17 @@ namespace appleTimer.DbProject
 			modelBuilder.Configurations.Add(new UserConfiguration());
 			modelBuilder.Configurations.Add(new RecordConfiguration());
 			modelBuilder.Configurations.Add(new GroupConfiguration());
-			modelBuilder.Entity<Record>()
-				.HasRequired<Group>(record => record.Group)
-				.WithMany(group => group.Records)
-				.HasForeignKey<Guid>(record => record.GroupId)
-				.WillCascadeOnDelete(false);
+            modelBuilder.Entity<Record>()
+                .HasOptional<Group>(record => record.Group)
+                .WithMany(group => group.Records)
+                .HasForeignKey<Guid?>(record => record.GroupId)
+                .WillCascadeOnDelete(false);
 
-			modelBuilder.Entity<Record>()
+            //modelBuilder.Entity<Group>()
+            //    .HasMany<Record>(group => group.Records)
+            //    .WithOptional(record => record.GroupId)
+
+            modelBuilder.Entity<Record>()
 				.HasRequired<User>(record => record.User)
 				.WithMany(user => user.Records)
 				.HasForeignKey<Guid>(record => record.UserId)

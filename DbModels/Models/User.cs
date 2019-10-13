@@ -17,9 +17,9 @@ namespace DbModels.Models
 		private string _email;
 		[DataMember]
 		private string _password;
-		[DataMember]
+		[IgnoreDataMember]
 		private List<Group> _groups;
-		[DataMember]
+		[IgnoreDataMember]
 		private List<Record> _records;
 
 		public Guid Id { get => _id; set => _id = value; }

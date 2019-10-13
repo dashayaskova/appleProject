@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using AppleTimer.Tools;
 using AppleTimer.Tools.Managers;
 using AppleTimer.Tools.Navigation;
+using System.Linq;
 using DbModels.Models;
 
 namespace AppleTimer.ViewModels
@@ -44,6 +45,7 @@ namespace AppleTimer.ViewModels
 
 
         #endregion
+        
         private async void DoLogin(PasswordBox pb)
         {
             LoaderManager.Instance.ShowLoader();
@@ -52,16 +54,20 @@ namespace AppleTimer.ViewModels
             {
                 using (var serv = new TimerService.TimerServerClient(StationManager.EndpointName))
                 {
+                    
                     if (!serv.UserExists(Username, pb.Password))
                     {
                         return null;
                     }
 
-                    return serv.GetUser(Username, pb.Password);
+                    User user = serv.GetUser(Username, pb.Password);
+                    user.Groups = serv.GetUserGroups(user).ToList();
+                    user.Records = serv.GetUserRecords(user).ToList();
+                    return user;
                 }
             });
             LoaderManager.Instance.HideLoader();
-
+            
             if (result == null)
             {
                 MessageBox.Show("Oooops. Couldn't find you.");

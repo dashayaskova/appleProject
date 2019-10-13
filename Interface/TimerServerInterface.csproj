@@ -46,7 +46,6 @@
     <Compile Include="ITimerServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TimerServerImpl.cs" />
-    <Compile Include="TimerServerWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DbModels\DbModels.csproj">
