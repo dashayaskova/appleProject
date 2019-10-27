@@ -12,7 +12,6 @@ F:\Универ\3 курс\c#\appleProject\DbProject\obj\Debug\DbProject.csproj.
 F:\Универ\3 курс\c#\appleProject\DbProject\obj\Debug\DbProject.csproj.CopyComplete
 F:\Универ\3 курс\c#\appleProject\DbProject\obj\Debug\DbProject.dll
 F:\Универ\3 курс\c#\appleProject\DbProject\obj\Debug\DbProject.pdb
-F:\Универ\3 курс\c#\appleProject\DbProject\obj\Debug\DbProject.Migrations.FirstMigration.resources
 F:\Универ\3 курс\c#\appleProject\DbProject\obj\Debug\DbProject.csproj.GenerateResource.cache
 C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\bin\Debug\DbProject.dll.config
 C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\bin\Debug\DbProject.dll
@@ -31,3 +30,6 @@ C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\obj\Debug\DbProject.c
 C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\obj\Debug\DbProject.csproj.CopyComplete
 C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\obj\Debug\DbProject.dll
 C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\obj\Debug\DbProject.pdb
+F:\Универ\3 курс\c#\appleProject\DbProject\bin\Debug\DbModels.dll.config
+F:\Универ\3 курс\c#\appleProject\DbProject\obj\Debug\DbProject.Migrations.Initial.resources
+F:\Универ\3 курс\c#\appleProject\DbProject\obj\Debug\DbProject.Migrations.TimeFormat.resources

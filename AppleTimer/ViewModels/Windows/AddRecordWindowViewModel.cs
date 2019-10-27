@@ -39,9 +39,8 @@ namespace AppleTimer.ViewModels.Windows
 
 		private void SaveImplementation(Window win)
 		{
-            StationManager.CurrentUser.Records.Add(StationManager.CurRecord);
+			StationManager.CurrentUser.Records.Add(StationManager.CurRecord);
 			StationManager.RefreshRecordsList();
-			StationManager.CleanRecord();
 			win?.Close();
 		}
 	}

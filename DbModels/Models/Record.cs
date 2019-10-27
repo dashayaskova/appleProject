@@ -31,7 +31,15 @@ namespace DbModels.Models
 		public long Duration { get => _duration; set => _duration = value; }
 		public DateTime? EndTime { get => _endTime; set => _endTime = value; }
 		public string Comment { get => _comment; set => _comment = value; }
-		public Group Group { get => _group; set => _group = value; }
+		public Group Group
+		{
+			get { return _group; }
+			set
+			{
+				_group = value;
+				GroupId = value?.Id;
+			}
+		}
 		public Guid? GroupId { get => _groupId; set => _groupId = value; }
 
         public Record()
@@ -47,7 +55,14 @@ namespace DbModels.Models
             StartTime = start;
         }
 
-        public void AddEndTime(DateTime dt)
+		public Record(User user)
+		{
+			Id = Guid.NewGuid();
+			User = user;
+			UserId = user.Id;
+		}
+
+		public void AddEndTime(DateTime dt)
         {
             EndTime = dt;
             Duration = (long)(EndTime - StartTime)?.TotalSeconds;

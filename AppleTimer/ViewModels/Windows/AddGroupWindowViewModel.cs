@@ -49,8 +49,8 @@ namespace AppleTimer.ViewModels.Windows
 
 		private void SaveImplementation(Window win)
 		{
-            StationManager.CurrentUser.Groups.Add(Group);
             SubmitNewGroup(Group);
+			StationManager.CurrentUser.Groups.Add(Group);
 			win?.Close();
 		}
 

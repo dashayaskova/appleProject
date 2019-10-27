@@ -90,7 +90,13 @@ namespace DbProject
             using (var context = new TimerContext())
             {
                 context.Users.Attach(record.User);
-                context.Records.Add(record);
+
+				if (record.Group != null)
+				{
+					context.Groups.Attach(record.Group);
+				}
+				
+				context.Records.Add(record);
                 context.SaveChanges();
             }
         }
@@ -165,8 +171,9 @@ namespace DbProject
             {
                 context.Users.Attach(group.User);
                 context.Groups.Add(group);
-                context.SaveChanges();
-            }
+				context.SaveChanges();
+				context.Entry(group).State = System.Data.Entity.EntityState.Unchanged;
+			}
         }
 
         public static void AddGroups(List<Group> groups)

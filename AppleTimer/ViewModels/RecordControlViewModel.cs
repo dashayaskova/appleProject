@@ -3,6 +3,8 @@ using AppleTimer.Tools;
 using AppleTimer.Tools.Managers;
 using AppleTimer.Views.Windows;
 using System.Windows.Data;
+using System;
+using System.Linq;
 
 namespace AppleTimer.ViewModels
 {
@@ -14,17 +16,16 @@ namespace AppleTimer.ViewModels
         private Record _record { get; set; }
         private RelayCommand<object> _addGroupCommand;
 
-
         #endregion
 
         #region Props
 
         public Record CurrentRecord
 		{
-			get { return _record; }
+			get { return StationManager.CurRecord; }
 			set
 			{
-				_record = value;
+				StationManager.CurRecord = value;
 				OnPropertyChanged();
 			}
 		}
@@ -45,18 +46,37 @@ namespace AppleTimer.ViewModels
         public RecordControlViewModel()
 		{
 			ViewSource.Source = StationManager.CurrentUser.Groups;
+			
+			if (!StationManager.IsWindow)
+			{
+				var records = GetNotFinishedRecords(StationManager.CurrentUser);
 
-			if (StationManager.IsWindow)
-			{
-				CurrentRecord = StationManager.CurRecord;
-			}
-			else
-			{
+				if(records.Length == 0)
+				{
+					StationManager.CurRecord = new Record(StationManager.CurrentUser);
+				}
+				else
+				{
+					var rec = records.FirstOrDefault();
+					rec.User = StationManager.CurrentUser;
+					StationManager.CurRecord = rec;
+				}
+
 				StationManager.IsWindow = true;
+
 				StationManager.CleanRecords += () =>
 				{
-                    CurrentRecord = null;
+					CurrentRecord = StationManager.CurRecord = new Record(StationManager.CurrentUser);
 				};
+			}
+
+		}
+
+		private Record[] GetNotFinishedRecords(User user)
+		{
+			using (var serv = new TimerService.TimerServerClient(StationManager.EndpointName))
+			{
+				return serv.GetUserRecords(user).Where(r => r.EndTime == null).ToArray();
 			}
 		}
 
@@ -65,9 +85,9 @@ namespace AppleTimer.ViewModels
 			StationManager.CurGroup = new Group();
 			AddGroupWindowView win = new AddGroupWindowView();
 			win.ShowDialog();
-			StationManager.CurrentUser.Groups.Add(StationManager.CurGroup);
 			ViewSource.View.Refresh();
 		}
+
 
 	}
 }
