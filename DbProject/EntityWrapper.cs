@@ -3,6 +3,7 @@ using DbModels.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 
 namespace DbProject
 {
@@ -81,7 +82,9 @@ namespace DbProject
         {
             using (var context = new TimerContext())
             {
-                return context.Records.Where(o => o.UserId == userId).ToList();
+                var a =  context.Records.Include(r => r.Group).Where(o => o.UserId == userId).ToList();
+                
+                return a;
             }
         }
         
@@ -124,7 +127,7 @@ namespace DbProject
         {
             using (var context = new TimerContext())
             {
-                context.Users.Attach(record.User);
+                //context.Users.Attach(record.User);
                 context.Groups.Attach(record.Group);
                 Record nRecord = context.Records.FirstOrDefault(r => r.Id == record.Id);
                 foreach (string p in update_fields)

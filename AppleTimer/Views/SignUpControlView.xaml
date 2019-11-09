@@ -28,7 +28,6 @@
                    FontSize="35" TextAlignment="Center"
                    VerticalAlignment="Center">
             AppleTimer <LineBreak/>
-            <Button Content="SignUp with Google" Height="25" FontSize="15" Margin="8"/>
         </TextBlock>
         <TextBlock Grid.Column="0" Grid.Row="1"
                    FontSize="15" Margin="8 0 0 0" Text="Username*" />

@@ -4,6 +4,7 @@ using AppleTimer.Tools.Managers;
 using System;
 using System.Windows;
 using System.Windows.Input;
+using System.Threading.Tasks;
 
 namespace AppleTimer.ViewModels.Windows
 {
@@ -39,9 +40,33 @@ namespace AppleTimer.ViewModels.Windows
 
 		private void SaveImplementation(Window win)
 		{
-			StationManager.CurrentUser.Records.Add(StationManager.CurRecord);
+            SubmitRecord(StationManager.CurRecord);
+            StationManager.CurrentUser.Records.Add(StationManager.CurRecord);
 			StationManager.RefreshRecordsList();
 			win?.Close();
 		}
-	}
+
+        private async void SubmitRecord(Record record)
+        {
+            await Task.Run(() =>
+            {
+                using (var serv = new TimerService.TimerServerClient(StationManager.EndpointName))
+                {
+                    if (record.Group?.Id == Guid.Empty)
+                    {
+                        serv.AddGroup(record.Group);
+                    }
+                    if (record.Id == Guid.Empty)
+                    {
+                        serv.AddRecord(record);
+                    }
+                    else
+                    {
+                        serv.UpdateRecord(record, new string[] { "EndTime", "Duration", "GroupId", "Comment"});
+                    }
+                }
+            }
+            );
+        }
+    }
 }

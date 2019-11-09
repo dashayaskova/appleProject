@@ -5,6 +5,7 @@ using AppleTimer.Tools;
 using AppleTimer.Tools.Managers;
 using AppleTimer.Tools.Navigation;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace AppleTimer.ViewModels
 {
@@ -63,6 +64,9 @@ namespace AppleTimer.ViewModels
             {
                 using (var serv = new TimerService.TimerServerClient(StationManager.EndpointName))
                 {
+                    user.Groups = serv.GetUserGroups(user).ToList();
+                    user.Records = serv.GetUserRecords(user).ToList();
+
                     serv.AddUser(user);
                 }
             });

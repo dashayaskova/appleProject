@@ -76,6 +76,7 @@ namespace AppleTimer.ViewModels
             {
                 StationManager.CurrentUser = result;
                 NavigationManager.Instance.Navigate(ViewType.MainView);
+                //StationManager.MainWindow.Width = 1000;
             }
         }
 

@@ -1,11 +1,14 @@
 ﻿using DbModels.Models;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace AppleTimer.Tools.Managers
 {
 	static class StationManager
 	{
         public static string EndpointName = "TimerServerWCF";
+
+        public static Window MainWindow = null;
 
         public static bool IsWindow { get; set; } = false;
 
