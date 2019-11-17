@@ -33,3 +33,4 @@ C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\obj\Debug\DbProject.p
 F:\Универ\3 курс\c#\appleProject\DbProject\bin\Debug\DbModels.dll.config
 F:\Универ\3 курс\c#\appleProject\DbProject\obj\Debug\DbProject.Migrations.Initial.resources
 F:\Универ\3 курс\c#\appleProject\DbProject\obj\Debug\DbProject.Migrations.TimeFormat.resources
+C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\obj\Debug\DbProject.Migrations.OptionalStartTime.resources

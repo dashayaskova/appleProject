@@ -9,6 +9,7 @@ using System.Windows.Data;
 using AppleTimer.Tools.Navigation;
 using System.Threading.Tasks;
 using System.Linq;
+using AppleTimer.TimerService;
 
 namespace AppleTimer.ViewModels
 {
@@ -98,15 +99,19 @@ namespace AppleTimer.ViewModels
 
 			StationManager.RefreshRecords += () =>
 			{
-                ViewSource.Source = StationManager.CurrentUser.Records.ToList();
-                ViewSource.View.Refresh();
+                using (var serv = new TimerServerClient())
+                {
+                    StationManager.CurrentUser.Records = serv.GetUserRecords(StationManager.CurrentUser).ToList();
+                    ViewSource.Source = StationManager.CurrentUser.Records;
+                    ViewSource.View.Refresh();
+                }
 			};
 		}
 
         private void StartImplementation()
 		{
 			StationManager.CurRecord.StartTime = DateTime.Now;
-			SubmitNewRecord(StationManager.CurRecord);
+			StationManager.SubmitUpdateRecord(StationManager.CurRecord, new string[] { "StartTime"});
 
 			_timer = new Timer(_cb, null, 0, 1000);
 		}
@@ -125,12 +130,18 @@ namespace AppleTimer.ViewModels
             _timer.Dispose();
             _timer = null;
             AddRecordWindowView win = new AddRecordWindowView();
-            win.ShowDialog();
+            bool? succ = win.ShowDialog();
+            if (succ != false)
+            {
+                StationManager.CurRecord.AddEndTime(DateTime.Now);
+                StationManager.SubmitUpdateRecord(StationManager.CurRecord, new [] { "Comment", "Group", "GroupId", "EndTime", "Duration" });
+            }
             _seconds = -1;
             ChangeText(obj);
-			StationManager.CurRecord.AddEndTime(DateTime.Now);
-			SubmitUpdateRecord(StationManager.CurRecord, new string[] { "Comment", "Group", "GroupId" ,"EndTime", "Duration"});
-			StationManager.CleanRecord();
+            StationManager.CleanRecord();
+            StationManager.RefreshRecordsList();
+            StationManager.CurRecord = new Record(StationManager.CurrentUser);
+
         }
 
 		private async void SubmitNewRecord(Record record)
@@ -145,17 +156,6 @@ namespace AppleTimer.ViewModels
             );
         }
 
-		private async void SubmitUpdateRecord(Record record, string[] updateFields)
-		{
-			await Task.Run(() =>
-			{
-				using (var serv = new TimerService.TimerServerClient(StationManager.EndpointName))
-				{
-					serv.UpdateRecord(record, updateFields);
-				}
-			}
-			);
-		}
 
         /// <summary>
         /// Изменение лейбы каждую секунду

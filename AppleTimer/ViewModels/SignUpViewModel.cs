@@ -54,7 +54,19 @@ namespace AppleTimer.ViewModels
 
         private async void DoSignUp(PasswordBox pb)
         {
-            User user = new User(Username, Email, pb.Password);
+            Guid newId = Guid.NewGuid();
+            UserCandidate userCand = new UserCandidate();
+            userCand.Id = newId;
+            userCand.Username = Username;
+            userCand.Email = Email;
+            userCand.Password = pb.Password;
+            userCand.Name = Name;
+            userCand.Surname = Surname;
+
+            User user = new User();
+            user.Id = newId;
+            user.Username = Username;
+            user.Email = Email;
             user.Name = Name;
             user.Surname = Surname;
 
@@ -64,10 +76,7 @@ namespace AppleTimer.ViewModels
             {
                 using (var serv = new TimerService.TimerServerClient(StationManager.EndpointName))
                 {
-                    user.Groups = serv.GetUserGroups(user).ToList();
-                    user.Records = serv.GetUserRecords(user).ToList();
-
-                    serv.AddUser(user);
+                    serv.AddUser(userCand);
                 }
             });
 

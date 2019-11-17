@@ -1,5 +1,6 @@
 ﻿using DbModels.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace AppleTimer.Tools.Managers
@@ -40,5 +41,15 @@ namespace AppleTimer.Tools.Managers
 		{
 			ShowWindow?.Invoke();
 		}
-	}
+
+        public static void SubmitUpdateRecord(Record record, string[] updateFields)
+        {
+
+                using (var serv = new TimerService.TimerServerClient(StationManager.EndpointName))
+                {
+                    serv.UpdateRecord(record, updateFields);
+                }
+
+        }
+    }
 }

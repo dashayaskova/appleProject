@@ -17,7 +17,7 @@ namespace TimerServerInterface
         User GetUser(string username, string password);
 
         [OperationContract]
-        void AddUser(User user);
+        void AddUser(UserCandidate user);
 
         [OperationContract]
         void UpdateUser(User user, string[] update_fields);

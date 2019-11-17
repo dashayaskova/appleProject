@@ -28,10 +28,10 @@ namespace AppleTimer.TimerService {
         System.Threading.Tasks.Task<DbModels.Models.User> GetUserAsync(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITimerServer/AddUser", ReplyAction="http://tempuri.org/ITimerServer/AddUserResponse")]
-        void AddUser(DbModels.Models.User user);
+        void AddUser(DbModels.Models.UserCandidate user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITimerServer/AddUser", ReplyAction="http://tempuri.org/ITimerServer/AddUserResponse")]
-        System.Threading.Tasks.Task AddUserAsync(DbModels.Models.User user);
+        System.Threading.Tasks.Task AddUserAsync(DbModels.Models.UserCandidate user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITimerServer/UpdateUser", ReplyAction="http://tempuri.org/ITimerServer/UpdateUserResponse")]
         void UpdateUser(DbModels.Models.User user, string[] update_fields);
@@ -143,11 +143,11 @@ namespace AppleTimer.TimerService {
             return base.Channel.GetUserAsync(username, password);
         }
         
-        public void AddUser(DbModels.Models.User user) {
+        public void AddUser(DbModels.Models.UserCandidate user) {
             base.Channel.AddUser(user);
         }
         
-        public System.Threading.Tasks.Task AddUserAsync(DbModels.Models.User user) {
+        public System.Threading.Tasks.Task AddUserAsync(DbModels.Models.UserCandidate user) {
             return base.Channel.AddUserAsync(user);
         }
         

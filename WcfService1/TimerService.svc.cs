@@ -23,7 +23,7 @@ namespace WcfService1
             return _service.GetUser(username, password);
         }
 
-        public void AddUser(User user)
+        public void AddUser(UserCandidate user)
         {
             _service.AddUser(user);
         }

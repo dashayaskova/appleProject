@@ -63,11 +63,12 @@ namespace AppleTimer.ViewModels
                     User user = serv.GetUser(Username, pb.Password);
                     user.Groups = serv.GetUserGroups(user).ToList();
                     user.Records = serv.GetUserRecords(user).ToList();
+
                     return user;
                 }
             });
             LoaderManager.Instance.HideLoader();
-            
+
             if (result == null)
             {
                 MessageBox.Show("Oooops. Couldn't find you.");
@@ -75,6 +76,8 @@ namespace AppleTimer.ViewModels
             else
             {
                 StationManager.CurrentUser = result;
+                StationManager.CurRecord = new Record(result);
+
                 NavigationManager.Instance.Navigate(ViewType.MainView);
                 //StationManager.MainWindow.Width = 1000;
             }

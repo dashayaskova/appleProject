@@ -1,5 +1,6 @@
 ﻿using DbModels.Models;
 using DbProject;
+using Interface.Tools;
 using System;
 using System.Collections.Generic;
 using TimerServerInterface;
@@ -12,16 +13,25 @@ namespace AppleTimer.Server.TimerServerInterface
 
         public bool UserExists(string username, string password)
         {
-            return EntityWrapper.UserExists(username, password);
+            string hash = CryptoManager.TransformPassword(password);
+            return EntityWrapper.UserExists(username, hash);
         }
 
         public User GetUser(string username, string password)
         {
-            return EntityWrapper.GetUser(username, password);
+            string hash = CryptoManager.TransformPassword(password);
+            return EntityWrapper.GetUser(username, hash);
         }
 
-        public void AddUser(User user)
+        public void AddUser(UserCandidate userCandidate)
         {
+            User user = new User();
+            user.Id = userCandidate.Id;
+            user.Name = userCandidate.Name;
+            user.Username = userCandidate.Username;
+            user.Surname = userCandidate.Surname;
+            user.Email = userCandidate.Email;
+            user.Password = CryptoManager.TransformPassword(userCandidate.Password);
             EntityWrapper.AddUser(user);
         }
 

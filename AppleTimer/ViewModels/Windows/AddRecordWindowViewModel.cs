@@ -5,6 +5,7 @@ using System;
 using System.Windows;
 using System.Windows.Input;
 using System.Threading.Tasks;
+using AppleTimer.TimerService;
 
 namespace AppleTimer.ViewModels.Windows
 {
@@ -22,7 +23,18 @@ namespace AppleTimer.ViewModels.Windows
 
 		public ICommand CancelCommand
 		{
-			get { return _cancelCommand ?? (_cancelCommand = new RelayCommand<Window>(w => w?.Close())); }
+            get
+            {
+                return _cancelCommand ?? (_cancelCommand = new RelayCommand<Window>(w =>
+                {
+                    using (var serv = new TimerServerClient())
+                    {
+                        serv.DeleteRecords(new Guid[] { StationManager.CurRecord.Id });
+                    }
+                    w.DialogResult = false;
+                    w?.Close();
+                }));
+            }
 		}
 
 		public ICommand SaveCommand
@@ -40,33 +52,15 @@ namespace AppleTimer.ViewModels.Windows
 
 		private void SaveImplementation(Window win)
 		{
-            SubmitRecord(StationManager.CurRecord);
-            StationManager.CurrentUser.Records.Add(StationManager.CurRecord);
-			StationManager.RefreshRecordsList();
+            StationManager.SubmitUpdateRecord(StationManager.CurRecord, new [] { "EndTime", "Duration", "GroupId", "Comment"});
+            if (!StationManager.CurrentUser.Records.Contains(StationManager.CurRecord))
+            {
+                StationManager.CurrentUser.Records.Add(StationManager.CurRecord);
+            }
+            StationManager.RefreshRecordsList();
+            win.DialogResult = true;
 			win?.Close();
 		}
 
-        private async void SubmitRecord(Record record)
-        {
-            await Task.Run(() =>
-            {
-                using (var serv = new TimerService.TimerServerClient(StationManager.EndpointName))
-                {
-                    if (record.Group?.Id == Guid.Empty)
-                    {
-                        serv.AddGroup(record.Group);
-                    }
-                    if (record.Id == Guid.Empty)
-                    {
-                        serv.AddRecord(record);
-                    }
-                    else
-                    {
-                        serv.UpdateRecord(record, new string[] { "EndTime", "Duration", "GroupId", "Comment"});
-                    }
-                }
-            }
-            );
-        }
     }
 }

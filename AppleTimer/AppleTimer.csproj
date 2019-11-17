@@ -195,9 +195,6 @@
     <None Include="Connected Services\TimerService\TimerService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\TimerService\TimerService4.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\DbModels.Models.Group.datasource" />
     <None Include="Properties\DataSources\DbModels.Models.Record.datasource" />
@@ -219,10 +216,6 @@
     <ProjectReference Include="..\DbModels\DbModels.csproj">
       <Project>{3aaed2bc-b099-4b29-b33b-801f38abaf15}</Project>
       <Name>DbModels</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DbProject\DbProject.csproj">
-      <Project>{1f195594-dfe3-4515-83f9-cc43c2bf3b29}</Project>
-      <Name>DbProject</Name>
     </ProjectReference>
     <ProjectReference Include="..\Interface\TimerServerInterface.csproj">
       <Project>{726ED771-CCCA-4949-A94C-F081DC05728D}</Project>

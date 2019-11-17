@@ -5,6 +5,7 @@ using AppleTimer.Views.Windows;
 using System.Windows.Data;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace AppleTimer.ViewModels
 {
@@ -30,7 +31,32 @@ namespace AppleTimer.ViewModels
 			}
 		}
 
-		public CollectionViewSource ViewSource { get; set; } = new CollectionViewSource();
+        public string RecordComment
+        {
+            get
+            {
+                return CurrentRecord.Comment;
+            }
+            set {
+                CurrentRecord.Comment = value;
+                StationManager.SubmitUpdateRecord(CurrentRecord, new string[] { "Comment" });
+            }
+        }
+
+        public Group RecordGroup
+        {
+            get
+            {
+                return CurrentRecord.Group;
+            }
+            set
+            {
+                CurrentRecord.Group = value;
+                StationManager.SubmitUpdateRecord(CurrentRecord, new string[] { "Group", "GroupId" });
+            }
+        }
+
+        public CollectionViewSource ViewSource { get; set; } = new CollectionViewSource();
 
         public RelayCommand<object> AddGroup
         {
@@ -49,17 +75,21 @@ namespace AppleTimer.ViewModels
 			
 			if (!StationManager.IsWindow)
 			{
-				var records = GetNotFinishedRecords(StationManager.CurrentUser);
+				var record = GetUnfinishedRecord(StationManager.CurrentUser);
 
-				if(records.Length == 0)
+				if(record == null)
 				{
 					StationManager.CurRecord = new Record(StationManager.CurrentUser);
 				}
 				else
 				{
-					var rec = records.FirstOrDefault();
-					rec.User = StationManager.CurrentUser;
-					StationManager.CurRecord = rec;
+					record.User = StationManager.CurrentUser;
+                    if (record.GroupId != null)
+                    {
+                        record.Group = StationManager.CurrentUser.Groups.First(g => g.Id == record.GroupId);
+                    }
+
+                    StationManager.CurRecord = record;
 				}
 
 				StationManager.IsWindow = true;
@@ -67,16 +97,19 @@ namespace AppleTimer.ViewModels
 				StationManager.CleanRecords += () =>
 				{
 					CurrentRecord = StationManager.CurRecord = new Record(StationManager.CurrentUser);
+                    OnPropertyChanged("RecordComment");
+                    OnPropertyChanged("RecordGroup");
 				};
 			}
 
 		}
 
-		private Record[] GetNotFinishedRecords(User user)
+		private Record GetUnfinishedRecord(User user)
 		{
 			using (var serv = new TimerService.TimerServerClient(StationManager.EndpointName))
 			{
-				return serv.GetUserRecords(user).Where(r => r.EndTime == null).ToArray();
+                var record = serv.GetUserRecords(user).Where(r => r.EndTime == null).FirstOrDefault();
+                return record;
 			}
 		}
 
@@ -89,6 +122,6 @@ namespace AppleTimer.ViewModels
 		}
 
 
-	}
+    }
 }
 

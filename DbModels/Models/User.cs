@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 
 namespace DbModels.Models
 {
-	[DataContract]
+	[DataContract(IsReference =true)]
 	public class User : IDBModel
 	{
 		[DataMember]
@@ -15,7 +15,7 @@ namespace DbModels.Models
 		private string _name;
 		[DataMember]
 		private string _email;
-		[DataMember]
+		[IgnoreDataMember]
 		private string _password;
 		[IgnoreDataMember]
 		private List<Group> _groups;

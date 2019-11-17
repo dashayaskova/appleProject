@@ -7,8 +7,8 @@ using System.Data.Entity;
 
 namespace DbProject
 {
-	public static class EntityWrapper
-	{
+    public static class EntityWrapper
+    {
 
         #region UserMethods
 
@@ -35,7 +35,8 @@ namespace DbProject
                 User n_user = context.Users.FirstOrDefault(u => u.Id == user.Id);
                 foreach (string p in update_fields)
                 {
-                    switch (p) {
+                    switch (p)
+                    {
                         case "Username":
                             n_user.Username = user.Username;
                             break;
@@ -82,24 +83,24 @@ namespace DbProject
         {
             using (var context = new TimerContext())
             {
-                var a =  context.Records.Include(r => r.Group).Where(o => o.UserId == userId).ToList();
-                
+                var a = context.Records.Include(r => r.Group).Where(o => o.UserId == userId).ToList();
+
                 return a;
             }
         }
-        
+
         public static void AddRecord(Record record)
         {
             using (var context = new TimerContext())
             {
                 context.Users.Attach(record.User);
 
-				if (record.Group != null)
-				{
-					context.Groups.Attach(record.Group);
-				}
-				
-				context.Records.Add(record);
+                if (record.Group != null)
+                {
+                    context.Groups.Attach(record.Group);
+                }
+
+                context.Records.Add(record);
                 context.SaveChanges();
             }
         }
@@ -117,8 +118,11 @@ namespace DbProject
         {
             using (var context = new TimerContext())
             {
-                var toDelete = context.Records.Where(r => record_ids.Contains(r.Id));
-                context.Records.RemoveRange(toDelete);
+                var toDelete = context.Records.Where(r => record_ids.Contains(r.Id)).ToList();
+                foreach (Record record in toDelete)
+                {
+                    context.Records.Remove(record);
+                }
                 context.SaveChanges();
             }
         }
@@ -127,35 +131,43 @@ namespace DbProject
         {
             using (var context = new TimerContext())
             {
-                //context.Users.Attach(record.User);
-                context.Groups.Attach(record.Group);
+                context.Users.Attach(record.User);
+                if (record.Group != null)
+                    context.Groups.Attach(record.Group);
                 Record nRecord = context.Records.FirstOrDefault(r => r.Id == record.Id);
-                foreach (string p in update_fields)
+                if (nRecord == null)
                 {
-                    switch (p)
+                    context.Records.Add(record);
+                }
+                else
+                {
+                    foreach (string p in update_fields)
                     {
-                        case "StartTime":
-                            nRecord.StartTime = record.StartTime;
-                            break;
-                        case "Duration":
-                            nRecord.Duration = record.Duration;
-                            break;
-                        case "EndTime":
-                            nRecord.EndTime = record.EndTime;
-                            break;
-                        case "Comment":
-                            nRecord.Comment = record.Comment;
-                            break;
-                        case "Group":
-                            nRecord.Group = record.Group;
-                            nRecord.GroupId = record.GroupId;
-                            break;
+                        switch (p)
+                        {
+                            case "StartTime":
+                                nRecord.StartTime = record.StartTime;
+                                break;
+                            case "Duration":
+                                nRecord.Duration = record.Duration;
+                                break;
+                            case "EndTime":
+                                nRecord.EndTime = record.EndTime;
+                                break;
+                            case "Comment":
+                                nRecord.Comment = record.Comment;
+                                break;
+                            case "Group":
+                                nRecord.Group = record.Group;
+                                nRecord.GroupId = record.GroupId;
+                                break;
+                        }
                     }
                 }
                 context.SaveChanges();
             }
         }
-        
+
         #endregion
 
         #region GroupMethods
@@ -167,16 +179,16 @@ namespace DbProject
                 return context.Groups.Where(o => o.UserId == userId).ToList();
             }
         }
-        
+
         public static void AddGroup(Group group)
         {
             using (var context = new TimerContext())
             {
                 context.Users.Attach(group.User);
                 context.Groups.Add(group);
-				context.SaveChanges();
-				context.Entry(group).State = System.Data.Entity.EntityState.Unchanged;
-			}
+                context.SaveChanges();
+                context.Entry(group).State = System.Data.Entity.EntityState.Unchanged;
+            }
         }
 
         public static void AddGroups(List<Group> groups)
