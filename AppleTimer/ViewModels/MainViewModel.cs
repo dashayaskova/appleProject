@@ -85,7 +85,7 @@ namespace AppleTimer.ViewModels
 
         public MainViewModel()
 		{
-			_seconds = (StationManager.CurRecord.StartTime != DateTime.MinValue) 
+			_seconds = (StationManager.CurRecord?.StartTime != DateTime.MinValue) 
 				? (long)(DateTime.Now - StationManager.CurRecord.StartTime).TotalSeconds : 0;
 			
 			_cb = new TimerCallback(ChangeText);
@@ -106,7 +106,20 @@ namespace AppleTimer.ViewModels
                     ViewSource.View.Refresh();
                 }
 			};
-		}
+
+            StationManager.DeleteInfo += () =>
+            {
+                Records = new List<Record>();
+                ViewSource.Source = Records;
+                ViewSource.View?.Refresh();
+                StationManager.CurrentUser = null;
+                StationManager.CurRecord = null;
+                StationManager.CurGroup = null;
+                StationManager.Groups = null;
+                StationManager.Records = null;
+                StationManager.IsWindow = false;
+            };
+        }
 
 		private void RemoveRecord(object obj)
 		{
@@ -140,7 +153,6 @@ namespace AppleTimer.ViewModels
             ChangeText(obj);
             StationManager.CleanRecord();
             StationManager.RefreshRecordsList();
-            StationManager.CurRecord = new Record(StationManager.CurrentUser);
         }
 
         /// <summary>
@@ -154,8 +166,9 @@ namespace AppleTimer.ViewModels
 
         private void DoLogout(object obj)
         {
-            StationManager.CurrentUser = null;
+            StationManager.DeleteUserInfo();
             NavigationManager.Instance.Navigate(ViewType.LoginView);
+            NavigationManager.Instance.Dispose(ViewType.MainView);
         }
-	}
+    }
 }

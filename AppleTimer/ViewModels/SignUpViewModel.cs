@@ -7,6 +7,7 @@ using AppleTimer.Tools.Navigation;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.Windows;
+using System.Collections.Generic;
 
 namespace AppleTimer.ViewModels
 {
@@ -59,19 +60,21 @@ namespace AppleTimer.ViewModels
 
         private bool CanSignUp(PasswordBox pb)
         {
-            return !String.IsNullOrEmpty(Username) && !String.IsNullOrEmpty(pb.Password)
-                                                   && !String.IsNullOrEmpty(Email);
+            return !String.IsNullOrEmpty(Username) && 
+                !String.IsNullOrEmpty(Name) &&
+                !String.IsNullOrEmpty(pb.Password) &&
+                !String.IsNullOrEmpty(Email);
         }
 
         #endregion
 
         private async void DoSignUp(PasswordBox pb)
         {
-			if (!new EmailAddressAttribute().IsValid(Email))
-			{
-				MessageBox.Show("Email is not correct!");
-				return;
-			}
+            if (!new EmailAddressAttribute().IsValid(Email))
+            {
+                MessageBox.Show("Email is not correct!");
+                return;
+            }
 
             Guid newId = Guid.NewGuid();
             UserCandidate userCand = new UserCandidate();
@@ -90,24 +93,34 @@ namespace AppleTimer.ViewModels
             user.Surname = Surname;
 
             LoaderManager.Instance.ShowLoader();
+            using (var serv = new TimerService.TimerServerClient(StationManager.EndpointName))
+            {
+                bool unique = await Task.Run(() =>
+                {
+                    return serv.IsUserUnique(Username, Email);
+                });
 
-				await Task.Run(() =>
-				{
-					using (var serv = new TimerService.TimerServerClient(StationManager.EndpointName))
-					{
-						if (serv.IsUserUnique(userCand.Username, userCand.Email))
-						{
-							serv.AddUser(userCand);
-						}
-						else
-						{
-							throw new AggregateException("Такий користувач вже існує");
-						}
-					}
-				});
+                if (!unique)
+                {
+                    MessageBox.Show("User with this username or email already exists");
+                    LoaderManager.Instance.HideLoader();
+                    return;
+                }
+                else
+                {
+                    await Task.Run(() =>
+                    {
+                        serv.AddUser(userCand);
+                    });
+                }
+            }
 
             LoaderManager.Instance.HideLoader();
-
+            StationManager.CurRecord = new Record();
+            StationManager.CurRecord.User = user;
+            StationManager.CurRecord.Id = Guid.NewGuid();
+            user.Groups = new List<Group>();
+            user.Records = new List<Record>();
             StationManager.CurrentUser = user;
             NavigationManager.Instance.Navigate(ViewType.MainView);
         }

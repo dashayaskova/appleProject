@@ -36,3 +36,4 @@ F:\Универ\3 курс\c#\appleProject\DbProject\obj\Debug\DbProject.csproj.
 F:\Универ\3 курс\c#\appleProject\DbProject\obj\Debug\DbProject.csproj.CopyComplete
 F:\Универ\3 курс\c#\appleProject\DbProject\obj\Debug\DbProject.dll
 F:\Универ\3 курс\c#\appleProject\DbProject\obj\Debug\DbProject.pdb
+C:\Users\misha\Documents\For uni\C#\appleProject\DbProject\obj\Debug\DbProject.Migrations.MaxUnique.resources

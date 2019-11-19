@@ -35,7 +35,7 @@
                  Margin="8"
                  Text="{Binding Username, Mode=TwoWay}"/>
         <TextBlock Grid.Column="0" Grid.Row="3"
-                   FontSize="15" Margin="8 0 0 0" Text="Name" />
+                   FontSize="15" Margin="8 0 0 0" Text="Name*" />
         <TextBox Grid.Column="0" Grid.Row="4"
                  Margin="8"
                  Text="{Binding Name, Mode=TwoWay}"/>

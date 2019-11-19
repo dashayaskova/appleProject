@@ -30,6 +30,12 @@ namespace AppleTimer.Tools.Navigation
             ContentOwner.ContentControl.Content = ViewsDictionary[viewType];
         }
 
+        public void Dispose(ViewType viewType)
+        {
+            if (ViewsDictionary.ContainsKey(viewType))
+                ViewsDictionary.Remove(viewType);
+        }
+
         protected abstract void InitializeView(ViewType viewType);
 
     }

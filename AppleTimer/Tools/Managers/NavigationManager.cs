@@ -38,5 +38,11 @@ namespace AppleTimer.Tools.Managers
 
         }
 
+        internal void Dispose(ViewType viewType)
+        {
+            _navigationModel.Dispose(viewType);
+
+        }
+
     }
 }

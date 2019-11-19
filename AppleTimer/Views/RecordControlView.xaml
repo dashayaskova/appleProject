@@ -15,7 +15,7 @@
             <ColumnDefinition Width="3*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <ComboBox Margin="100 10 20 10" ItemsSource="{Binding ViewSource.View}" SelectedItem="{Binding RecordGroup, Mode=TwoWay}"
+        <xctk:WatermarkComboBox Margin="100 10 20 10" ItemsSource="{Binding ViewSource.View}" SelectedItem="{Binding RecordGroup, Mode=TwoWay}" Watermark="Category"
                                 >
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -29,7 +29,7 @@
                     </Grid>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
-        </ComboBox>
+        </xctk:WatermarkComboBox>
         <Button Grid.Column="1" Width="40" Margin="-30 10 0 10" Content="+" Command="{Binding AddGroup}"></Button>
         <xctk:WatermarkTextBox Grid.ColumnSpan="2" Grid.Row="1" Margin="20 0 20 40" Text="{Binding RecordComment, Mode=TwoWay}"  Watermark="What are you doing?"/>
 

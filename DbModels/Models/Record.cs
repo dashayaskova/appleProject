@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace DbModels.Models
 {
-	public class Record : IDBModel
+    public class Record : IDBModel
 	{
 		[DataMember]
 		private Guid _id;

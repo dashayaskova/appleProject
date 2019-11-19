@@ -4,6 +4,7 @@ using AppleTimer.Tools.Managers;
 using AppleTimer.Views.Windows;
 using System.Windows.Data;
 using System.Linq;
+using System;
 
 namespace AppleTimer.ViewModels
 {
@@ -69,38 +70,18 @@ namespace AppleTimer.ViewModels
         #endregion
 
         public RecordControlViewModel()
-		{
-			ViewSource.Source = StationManager.CurrentUser.Groups;
-			
-			if (!StationManager.IsWindow)
-			{
-				var record = StationManager.GetUnfinishedRecord(StationManager.CurrentUser);
+        {
+            ViewSource.Source = StationManager.CurrentUser.Groups;
 
-				if (record == null) // никогда не заходит
-				{
-					//StationManager.CurRecord = new Record(StationManager.CurrentUser);
-				}
-				else
-				{
-					record.User = StationManager.CurrentUser;
-                    if (record.GroupId != null)
-                    {
-                        record.Group = StationManager.CurrentUser.Groups.First(g => g.Id == record.GroupId);
-                    }
-
-                    StationManager.CurRecord = record;
-				}
-
-				StationManager.IsWindow = true;
-
-				StationManager.CleanRecords += () =>
-				{
-					CurrentRecord = StationManager.CurRecord = new Record(StationManager.CurrentUser);
-                    OnPropertyChanged("RecordComment");
-                    OnPropertyChanged("RecordGroup");
-				};
-			}
-		}
+            StationManager.CleanRecords += () =>
+            {
+                Record rec = new Record(StationManager.CurrentUser);
+                rec.Id = Guid.NewGuid();
+                CurrentRecord = StationManager.CurRecord = rec;
+                OnPropertyChanged("RecordComment");
+                OnPropertyChanged("RecordGroup");
+            };
+        }
 
 		private void AddGroupImplementation()
 		{

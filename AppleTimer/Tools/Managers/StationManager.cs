@@ -26,7 +26,7 @@ namespace AppleTimer.Tools.Managers
 
 		public static event MyRefresh CleanRecords;
 
-		public static event MyRefresh ShowWindow;
+		public static event MyRefresh DeleteInfo;
 
 		public static void RefreshRecordsList()
 		{
@@ -38,9 +38,9 @@ namespace AppleTimer.Tools.Managers
 			CleanRecords?.Invoke();
 		}
 
-		public static void ShowTaskWindow()
+		public static void DeleteUserInfo()
 		{
-			ShowWindow?.Invoke();
+            DeleteInfo?.Invoke();
 		}
 
         public static void SubmitUpdateRecord(Record record, string[] updateFields)
