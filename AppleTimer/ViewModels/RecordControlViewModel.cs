@@ -3,9 +3,7 @@ using AppleTimer.Tools;
 using AppleTimer.Tools.Managers;
 using AppleTimer.Views.Windows;
 using System.Windows.Data;
-using System;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace AppleTimer.ViewModels
 {
@@ -37,7 +35,8 @@ namespace AppleTimer.ViewModels
             {
                 return CurrentRecord.Comment;
             }
-            set {
+            set
+			{
                 CurrentRecord.Comment = value;
                 StationManager.SubmitUpdateRecord(CurrentRecord, new string[] { "Comment" });
             }
@@ -75,11 +74,11 @@ namespace AppleTimer.ViewModels
 			
 			if (!StationManager.IsWindow)
 			{
-				var record = GetUnfinishedRecord(StationManager.CurrentUser);
+				var record = StationManager.GetUnfinishedRecord(StationManager.CurrentUser);
 
-				if(record == null)
+				if (record == null) // никогда не заходит
 				{
-					StationManager.CurRecord = new Record(StationManager.CurrentUser);
+					//StationManager.CurRecord = new Record(StationManager.CurrentUser);
 				}
 				else
 				{
@@ -101,24 +100,17 @@ namespace AppleTimer.ViewModels
                     OnPropertyChanged("RecordGroup");
 				};
 			}
-
-		}
-
-		private Record GetUnfinishedRecord(User user)
-		{
-			using (var serv = new TimerService.TimerServerClient(StationManager.EndpointName))
-			{
-                var record = serv.GetUserRecords(user).Where(r => r.EndTime == null).FirstOrDefault();
-                return record;
-			}
 		}
 
 		private void AddGroupImplementation()
 		{
 			StationManager.CurGroup = new Group();
 			AddGroupWindowView win = new AddGroupWindowView();
-			win.ShowDialog();
-			ViewSource.View.Refresh();
+			bool? res= win.ShowDialog();
+			if (res == true)
+			{
+				ViewSource.View.Refresh();
+			}
 		}
 
 

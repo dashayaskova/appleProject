@@ -4,8 +4,6 @@ using AppleTimer.Tools.Managers;
 using System;
 using System.Windows;
 using System.Windows.Input;
-using System.Threading.Tasks;
-using AppleTimer.TimerService;
 
 namespace AppleTimer.ViewModels.Windows
 {
@@ -27,10 +25,7 @@ namespace AppleTimer.ViewModels.Windows
             {
                 return _cancelCommand ?? (_cancelCommand = new RelayCommand<Window>(w =>
                 {
-                    using (var serv = new TimerServerClient())
-                    {
-                        serv.DeleteRecords(new Guid[] { StationManager.CurRecord.Id });
-                    }
+					StationManager.DeleteRecord(StationManager.CurRecord.Id);
                     w.DialogResult = false;
                     w?.Close();
                 }));
@@ -53,14 +48,15 @@ namespace AppleTimer.ViewModels.Windows
 		private void SaveImplementation(Window win)
 		{
             StationManager.SubmitUpdateRecord(StationManager.CurRecord, new [] { "EndTime", "Duration", "GroupId", "Comment"});
+
             if (!StationManager.CurrentUser.Records.Contains(StationManager.CurRecord))
             {
                 StationManager.CurrentUser.Records.Add(StationManager.CurRecord);
             }
+
             StationManager.RefreshRecordsList();
             win.DialogResult = true;
 			win?.Close();
 		}
-
     }
 }

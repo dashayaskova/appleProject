@@ -10,12 +10,11 @@ namespace DbProject.ModelConfigurations
 			ToTable("user");
 			HasKey(user => user.Id);
 			Property(user => user.Id).HasColumnName("id").IsRequired();
-			Property(user => user.Username).HasColumnName("username").IsRequired();
-			Property(user => user.Email).HasColumnName("email").IsRequired();
+			Property(user => user.Username).HasMaxLength(100).HasColumnName("username").IsRequired();
+			Property(user => user.Email).HasMaxLength(100).HasColumnName("email").IsRequired();
 			Property(user => user.Name).HasColumnName("name").IsRequired();
 			Property(user => user.Password).HasColumnName("password").IsRequired();
 			Property(user => user.Surname).HasColumnName("surname");
-			
 		}
 	}
 }

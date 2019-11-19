@@ -61,6 +61,10 @@
     <Compile Include="Migrations\201911131533054_OptionalStartTime.Designer.cs">
       <DependentUpon>201911131533054_OptionalStartTime.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911172131119_MaxUnique.cs" />
+    <Compile Include="Migrations\201911172131119_MaxUnique.Designer.cs">
+      <DependentUpon>201911172131119_MaxUnique.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfigurations\GroupConfiguration.cs" />
     <Compile Include="ModelConfigurations\RecordConfiguration.cs" />
@@ -87,6 +91,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911131533054_OptionalStartTime.resx">
       <DependentUpon>201911131533054_OptionalStartTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911172131119_MaxUnique.resx">
+      <DependentUpon>201911172131119_MaxUnique.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

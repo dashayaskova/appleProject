@@ -221,14 +221,6 @@
       <Project>{726ED771-CCCA-4949-A94C-F081DC05728D}</Project>
       <Name>TimerServerInterface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Managers\Managers.csproj">
-      <Project>{d3aa5b1a-663e-49b9-a9ab-cc8a2c30a929}</Project>
-      <Name>Managers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Providers\Providers.csproj">
-      <Project>{CC9E5A15-4189-443F-BB43-42EB38E2E329}</Project>
-      <Name>Providers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\WcfService1\TimerWCFService.csproj">
       <Project>{1890C839-2AB5-44AB-BE31-92FCE9296D87}</Project>
       <Name>TimerWCFService</Name>

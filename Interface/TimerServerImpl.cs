@@ -9,9 +9,13 @@ namespace AppleTimer.Server.TimerServerInterface
 {
 	public class TimerServerImpl : ITimerServer
 	{
-        #region UserMethods
+		#region UserMethods
+		public bool IsUserUnique(string username, string email)
+		{
+			return EntityWrapper.IsUserUnique(username, email);
+		}
 
-        public bool UserExists(string username, string password)
+		public bool UserExists(string username, string password)
         {
             string hash = CryptoManager.TransformPassword(password);
             return EntityWrapper.UserExists(username, hash);

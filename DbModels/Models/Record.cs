@@ -29,6 +29,7 @@ namespace DbModels.Models
 		public Guid UserId { get => _userId; set => _userId = value; }
 		public DateTime StartTime { get => _startTime; set => _startTime = value; }
 		public long Duration { get => _duration; set => _duration = value; }
+		public string DurationFormat { get => TimeSpan.FromSeconds(Duration).ToString(@"hh\:mm\:ss"); }
 		public DateTime? EndTime { get => _endTime; set => _endTime = value; }
 		public string Comment { get => _comment; set => _comment = value; }
 		public Group Group

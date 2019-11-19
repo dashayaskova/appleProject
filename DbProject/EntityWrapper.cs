@@ -12,15 +12,23 @@ namespace DbProject
 
         #region UserMethods
 
-        public static bool UserExists(string username, string password)
-        {
+		public static bool UserExists(string username, string password)
+		{
             using (var context = new TimerContext())
             {
                 return context.Users.Any(u => u.Username == username && u.Password == password);
             }
         }
 
-        public static User GetUser(string username, string password)
+		public static bool IsUserUnique(string username, string email)
+		{
+			using (var context = new TimerContext())
+			{
+				return !context.Users.Any(u => u.Username == username || u.Email == email);
+			}
+		}
+
+		public static User GetUser(string username, string password)
         {
             using (var context = new TimerContext())
             {

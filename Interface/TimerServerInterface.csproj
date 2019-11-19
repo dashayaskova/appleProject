@@ -57,14 +57,6 @@
       <Project>{1F195594-DFE3-4515-83F9-CC43C2BF3B29}</Project>
       <Name>DbProject</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Providers\Providers.csproj">
-      <Project>{CC9E5A15-4189-443F-BB43-42EB38E2E329}</Project>
-      <Name>Providers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Tools\Tools.csproj">
-      <Project>{B0D4729E-CC91-4985-A78D-148AEA819257}</Project>
-      <Name>Tools</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

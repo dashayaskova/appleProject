@@ -5,7 +5,8 @@ using AppleTimer.Tools;
 using AppleTimer.Tools.Managers;
 using AppleTimer.Tools.Navigation;
 using System.Threading.Tasks;
-using System.Linq;
+using System.ComponentModel.DataAnnotations;
+using System.Windows;
 
 namespace AppleTimer.ViewModels
 {
@@ -29,7 +30,19 @@ namespace AppleTimer.ViewModels
         {
             get
             {
-                return _signUpCommand ?? (_signUpCommand = new RelayCommand<PasswordBox>(DoSignUp, CanSignUp));
+                return _signUpCommand ?? (_signUpCommand = new RelayCommand<PasswordBox>(
+					o => 
+					{
+						try
+						{
+							DoSignUp(o);
+						}
+						catch
+						{
+
+						}
+						
+					}, CanSignUp));
             }
         }
 
@@ -54,6 +67,12 @@ namespace AppleTimer.ViewModels
 
         private async void DoSignUp(PasswordBox pb)
         {
+			if (!new EmailAddressAttribute().IsValid(Email))
+			{
+				MessageBox.Show("Email is not correct!");
+				return;
+			}
+
             Guid newId = Guid.NewGuid();
             UserCandidate userCand = new UserCandidate();
             userCand.Id = newId;
@@ -72,13 +91,20 @@ namespace AppleTimer.ViewModels
 
             LoaderManager.Instance.ShowLoader();
 
-            await Task.Run(() =>
-            {
-                using (var serv = new TimerService.TimerServerClient(StationManager.EndpointName))
-                {
-                    serv.AddUser(userCand);
-                }
-            });
+				await Task.Run(() =>
+				{
+					using (var serv = new TimerService.TimerServerClient(StationManager.EndpointName))
+					{
+						if (serv.IsUserUnique(userCand.Username, userCand.Email))
+						{
+							serv.AddUser(userCand);
+						}
+						else
+						{
+							throw new AggregateException("Такий користувач вже існує");
+						}
+					}
+				});
 
             LoaderManager.Instance.HideLoader();
 

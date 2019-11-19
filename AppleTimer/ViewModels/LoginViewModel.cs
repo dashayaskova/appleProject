@@ -79,7 +79,6 @@ namespace AppleTimer.ViewModels
                 StationManager.CurRecord = new Record(result);
 
                 NavigationManager.Instance.Navigate(ViewType.MainView);
-                //StationManager.MainWindow.Width = 1000;
             }
         }
 
