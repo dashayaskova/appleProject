@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Data;
 using AppleTimer.Tools.Navigation;
-using System.Threading.Tasks;
 using System.Linq;
+using AppleTimer.TimerService;
 
 namespace AppleTimer.ViewModels
 {
@@ -21,19 +21,18 @@ namespace AppleTimer.ViewModels
         private Timer _timer = null;
         private TimerCallback _cb;
         private bool _isPause = false;
-        private int _seconds = 0;
+        private long _seconds = 0;
 
         private RelayCommand<object> _startCommand;
         private RelayCommand<object> _stopCommand;
-        private RelayCommand<object> _pauseCommand;
         private RelayCommand<object> _logoutCommand;
+		private RelayCommand<object> _removeCommand;
 
+		#endregion
 
-        #endregion
+		#region Properties
 
-        #region Properties
-
-        public List<Record> Records { get; set; } = StationManager.Records;
+		public List<Record> Records { get; set; } = StationManager.Records;
 
 		public CollectionViewSource ViewSource { get; set; } = new CollectionViewSource();
 
@@ -47,7 +46,9 @@ namespace AppleTimer.ViewModels
 			}
 		}
 
-        public RelayCommand<object> Start
+		public Record SelectedRecord { get; set; }
+
+		public RelayCommand<object> Start
         {
             get
             {
@@ -64,15 +65,15 @@ namespace AppleTimer.ViewModels
             }
         }
 
-        public RelayCommand<object> Pause
-        {
-            get
-            {
-                return _pauseCommand ?? (_pauseCommand = new RelayCommand<object>(PauseImplementation, o => _timer != null && !_isPause));
-            }
-        }
+		public RelayCommand<object> RemoveCommand
+		{
+			get
+			{
+				return _logoutCommand ?? (_removeCommand = new RelayCommand<object>(RemoveRecord, o => SelectedRecord != null));
+			}
+		}
 
-        public RelayCommand<object> LogoutCommand
+		public RelayCommand<object> LogoutCommand
         {
             get
             {
@@ -84,44 +85,55 @@ namespace AppleTimer.ViewModels
 
         public MainViewModel()
 		{
+			_seconds = (StationManager.CurRecord?.StartTime != DateTime.MinValue) 
+				? (long)(DateTime.Now - StationManager.CurRecord.StartTime).TotalSeconds : 0;
+			
 			_cb = new TimerCallback(ChangeText);
 			Time = TimeSpan.FromSeconds(_seconds).ToString(@"hh\:mm\:ss");
 			ViewSource.Source = StationManager.CurrentUser.Records;
 
-			StationManager.RefreshRecords += () =>
-			{
-                ViewSource.Source = StationManager.CurrentUser.Records.ToList();
-                ViewSource.View.Refresh();
-			};
-		}
-
-        private void StartImplementation()
-		{
-            if (StationManager.CurRecord == null)
-            {
-                StationManager.CurRecord = new Record(StationManager.CurrentUser, DateTime.Now);
-                SubmitNewRecord(StationManager.CurRecord);
-            }
-
-			if (_isPause)
-			{
-				_timer.Change(0, 1000);
-				_isPause = false;
-			}
-			else
+			if (StationManager.CurRecord.StartTime != DateTime.MinValue)
 			{
 				_timer = new Timer(_cb, null, 0, 1000);
 			}
 
+			StationManager.RefreshRecords += () =>
+			{
+                using (var serv = new TimerServerClient())
+                {
+                    StationManager.CurrentUser.Records = serv.GetUserRecords(StationManager.CurrentUser).ToList();
+                    ViewSource.Source = StationManager.CurrentUser.Records;
+                    ViewSource.View.Refresh();
+                }
+			};
+
+            StationManager.DeleteInfo += () =>
+            {
+                Records = new List<Record>();
+                ViewSource.Source = Records;
+                ViewSource.View?.Refresh();
+                StationManager.CurrentUser = null;
+                StationManager.CurRecord = null;
+                StationManager.CurGroup = null;
+                StationManager.Groups = null;
+                StationManager.Records = null;
+                StationManager.IsWindow = false;
+            };
+        }
+
+		private void RemoveRecord(object obj)
+		{
+			StationManager.DeleteRecord(SelectedRecord.Id);
+			StationManager.RefreshRecordsList();
 		}
 
-        private void PauseImplementation(object obj)
-        {
-            _timer.Change(Timeout.Infinite, Timeout.Infinite);
-            _isPause = true;
-            StationManager.CurRecord.AddEndTime(DateTime.Now);
-            SubmitUpdateRecord(StationManager.CurRecord, new string[] { "EndTime", "Duration" });
-        }
+		private void StartImplementation()
+		{
+			StationManager.CurRecord.StartTime = DateTime.Now;
+			StationManager.SubmitUpdateRecord(StationManager.CurRecord, new string[] { "StartTime"});
+
+			_timer = new Timer(_cb, null, 0, 1000);
+		}
 
         private void EndImplementation(object obj)
         {
@@ -129,37 +141,19 @@ namespace AppleTimer.ViewModels
             _timer.Dispose();
             _timer = null;
             AddRecordWindowView win = new AddRecordWindowView();
-            win.ShowDialog();
+            bool? succ = win.ShowDialog();
+
+            if (succ != false)
+            {
+                StationManager.CurRecord.AddEndTime(DateTime.Now);
+                StationManager.SubmitUpdateRecord(StationManager.CurRecord, new [] { "Comment", "Group", "GroupId", "EndTime", "Duration" });
+            }
+
             _seconds = -1;
             ChangeText(obj);
-            SubmitUpdateRecord(StationManager.CurRecord, new string[] { "Comment", "Group", "GroupId" ,"EndTime", "Duration"});
-            StationManager.CurRecord = null;
+            StationManager.CleanRecord();
+            StationManager.RefreshRecordsList();
         }
-
-        private async void SubmitNewRecord(Record record)
-        {
-            await Task.Run(() =>
-            {
-                using (var serv = new TimerService.TimerServerClient(StationManager.EndpointName))
-                {
-                    serv.AddRecord(record);
-                }
-            }
-            );
-        }
-
-        private async void SubmitUpdateRecord(Record record, string[] updateFields)
-        {
-            await Task.Run(() =>
-            {
-                using (var serv = new TimerService.TimerServerClient(StationManager.EndpointName))
-                {
-                    serv.UpdateRecord(record, updateFields);
-                }
-            }
-            );
-        }
-
 
         /// <summary>
         /// Изменение лейбы каждую секунду
@@ -172,9 +166,9 @@ namespace AppleTimer.ViewModels
 
         private void DoLogout(object obj)
         {
-            StationManager.CurrentUser = null;
-
+            StationManager.DeleteUserInfo();
             NavigationManager.Instance.Navigate(ViewType.LoginView);
+            NavigationManager.Instance.Dispose(ViewType.MainView);
         }
-	}
+    }
 }

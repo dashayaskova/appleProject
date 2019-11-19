@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AppleTimer.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="300">
+             d:DesignHeight="450" d:DesignWidth="300" Width="300" Height="400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"></RowDefinition>
@@ -22,14 +22,16 @@
         <TextBlock Grid.Column="0" Grid.Row="0" 
                    FontSize="40" TextAlignment="Center" Text="AppleTimer"/>
         <TextBlock Grid.Column="0" Grid.Row="1"
-                   FontSize="20" Margin="8 0 0 0" Text="Username" />
+                   FontSize="22" Margin="8 0 0 0" Text="Username" />
         <TextBox Grid.Column="0" Grid.Row="2"
                  Margin="8"
+                 FontSize="20"
                  Text="{Binding Username, Mode=TwoWay}"/>
         <TextBlock Grid.Column="0" Grid.Row="3"
-                   FontSize="20"  Margin="8 0 0 0" Text="Password" />
+                   FontSize="22"  Margin="8 0 0 0" Text="Password" />
         <PasswordBox Grid.Column="0" Grid.Row="4"
                      Margin="8"
+                     FontSize="20"
                      Name="PBpass1"/>
         <Button Grid.Column="0" Grid.Row="6"
                 Width="150" Margin="8" Content="Login"
@@ -40,9 +42,5 @@
             <Button Content="SignUp" HorizontalAlignment="Center" Background="Transparent"
                     Command="{Binding SignUpCommand}"/>
         </TextBlock>
-        <Button Grid.Column="0" Grid.Row="8"
-                Width="150" Margin="8" Content="Login with Google"
-                 FontSize="15">
-        </Button>
     </Grid>
 </UserControl>

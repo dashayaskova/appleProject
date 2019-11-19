@@ -8,16 +8,16 @@ namespace TimerServerInterface
 	[ServiceContract]
 	public interface ITimerServer
 	{
-        #region UserMethods
+		#region UserMethods
 
-        [OperationContract]
+		[OperationContract]
         bool UserExists(string username, string password);
 
         [OperationContract]
         User GetUser(string username, string password);
 
         [OperationContract]
-        void AddUser(User user);
+        void AddUser(UserCandidate user);
 
         [OperationContract]
         void UpdateUser(User user, string[] update_fields);
@@ -59,6 +59,9 @@ namespace TimerServerInterface
         [OperationContract]
         void UpdateGroup(Group group, string[] update_fields);
 
-        #endregion
-    }
+		#endregion
+
+		[OperationContract]
+		bool IsUserUnique(string username, string email);
+	}
 }

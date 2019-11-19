@@ -29,7 +29,13 @@ namespace AppleTimer.ViewModels.Windows
 
         public ICommand CancelCommand
 		{
-			get { return _cancelCommand ?? (_cancelCommand = new RelayCommand<Window>(w => w?.Close())); }
+			get { return _cancelCommand ?? (_cancelCommand = new RelayCommand<Window>(CancelImplementation)); }
+		}
+
+		private void CancelImplementation(Window win)
+		{
+			win.DialogResult = false;
+			win?.Close();
 		}
 
 		public ICommand SaveCommand
@@ -49,8 +55,9 @@ namespace AppleTimer.ViewModels.Windows
 
 		private void SaveImplementation(Window win)
 		{
-            StationManager.CurrentUser.Groups.Add(Group);
             SubmitNewGroup(Group);
+			StationManager.CurrentUser.Groups.Add(Group);
+			win.DialogResult = true;
 			win?.Close();
 		}
 

@@ -32,18 +32,22 @@ namespace AppleTimer.Tools
             _canExecute = canExecute;
         }
 
-        #endregion
+		public RelayCommand(RelayCommand<object> removeCommand)
+		{
+		}
 
-        #region ICommand Members
+		#endregion
 
-        ///<summary>
-        ///Defines the method that determines whether the command can execute in its current state.
-        ///</summary>
-        ///<param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
-        ///<returns>
-        ///true if this command can be executed; otherwise, false.
-        ///</returns>
-        public bool CanExecute(object parameter)
+		#region ICommand Members
+
+		///<summary>
+		///Defines the method that determines whether the command can execute in its current state.
+		///</summary>
+		///<param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
+		///<returns>
+		///true if this command can be executed; otherwise, false.
+		///</returns>
+		public bool CanExecute(object parameter)
         {
             return _canExecute?.Invoke((T)parameter) ?? true;
         }

@@ -27,12 +27,16 @@ namespace DbModels.Models
         #endregion
 
         #region Properties
+        [IgnoreDataMember]
+
         public List<Record> Records { get => records; set => records = value; }
         public Guid Id { get => id; set => id = value; }
         public User User { get => user; set => user = value; }
         public Guid UserId { get => userId; set => userId = value; }
         public string Name { get => name; set => name = value; }
         public string ColorString { get => colorString; set => colorString = value; }
+
+        [IgnoreDataMember]
 
         public Color Color
         {

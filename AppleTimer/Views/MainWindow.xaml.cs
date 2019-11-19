@@ -22,7 +22,7 @@ namespace AppleTimer.Views
         {
             InitializeComponent();
             DataContext = new MainWindowViewModel();
-
+            StationManager.MainWindow = this;
  
             NavigationManager.Instance.Initialize(new InitializationNavigationModel(this));
             Width = 400;

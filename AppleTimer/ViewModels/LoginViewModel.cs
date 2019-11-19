@@ -45,39 +45,54 @@ namespace AppleTimer.ViewModels
 
 
         #endregion
-        
+
         private async void DoLogin(PasswordBox pb)
         {
             LoaderManager.Instance.ShowLoader();
-
-            var result = await Task.Run(() =>
+            using (var serv = new TimerService.TimerServerClient(StationManager.EndpointName))
             {
-                using (var serv = new TimerService.TimerServerClient(StationManager.EndpointName))
+                var result = await Task.Run(() =>
                 {
-                    
                     if (!serv.UserExists(Username, pb.Password))
                     {
                         return null;
                     }
-
                     User user = serv.GetUser(Username, pb.Password);
                     user.Groups = serv.GetUserGroups(user).ToList();
                     user.Records = serv.GetUserRecords(user).ToList();
                     return user;
+                });
+
+
+                if (result == null)
+                {
+                    MessageBox.Show("Oooops. Couldn't find you.");
+                    LoaderManager.Instance.HideLoader();
+                    return;
                 }
-            });
-            LoaderManager.Instance.HideLoader();
-            
-            if (result == null)
-            {
-                MessageBox.Show("Oooops. Couldn't find you.");
-            }
-            else
-            {
-                StationManager.CurrentUser = result;
-                NavigationManager.Instance.Navigate(ViewType.MainView);
+                else
+                {
+                    StationManager.CurrentUser = result;
+                    var record = await Task.Run(() => serv.GetUserRecords(result).Where(r => r.EndTime == null).FirstOrDefault());
+                    if (record != null)
+                    {
+                        record.User = result;
+                        StationManager.CurRecord = record;
+                    }
+                    else
+                    {
+                        Record rec = new Record();
+                        rec.User = result;
+                        rec.Id = Guid.NewGuid();
+                        StationManager.CurRecord = rec;
+                    }
+                    LoaderManager.Instance.HideLoader();
+                    pb.Clear();
+                    NavigationManager.Instance.Navigate(ViewType.MainView);
+                }
+
             }
         }
-
     }
+
 }

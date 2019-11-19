@@ -11,5 +11,6 @@
     interface INavigationModel
     {
         void Navigate(ViewType viewType);
+        void Dispose(ViewType viewType);
     }
 }

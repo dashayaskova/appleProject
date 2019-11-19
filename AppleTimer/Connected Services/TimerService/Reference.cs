@@ -14,8 +14,10 @@ namespace AppleTimer.TimerService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="TimerService.ITimerServer")]
     public interface ITimerServer {
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITimerServer/UserExists", ReplyAction="http://tempuri.org/ITimerServer/UserExistsResponse")]
+		[System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/ITimerServer/IsUserUnique", ReplyAction = "http://tempuri.org/ITimerServer/IsUserUniqueResponse")]
+		bool IsUserUnique(string username, string email);
+
+		[System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITimerServer/UserExists", ReplyAction="http://tempuri.org/ITimerServer/UserExistsResponse")]
         bool UserExists(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITimerServer/UserExists", ReplyAction="http://tempuri.org/ITimerServer/UserExistsResponse")]
@@ -28,10 +30,10 @@ namespace AppleTimer.TimerService {
         System.Threading.Tasks.Task<DbModels.Models.User> GetUserAsync(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITimerServer/AddUser", ReplyAction="http://tempuri.org/ITimerServer/AddUserResponse")]
-        void AddUser(DbModels.Models.User user);
+        void AddUser(DbModels.Models.UserCandidate user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITimerServer/AddUser", ReplyAction="http://tempuri.org/ITimerServer/AddUserResponse")]
-        System.Threading.Tasks.Task AddUserAsync(DbModels.Models.User user);
+        System.Threading.Tasks.Task AddUserAsync(DbModels.Models.UserCandidate user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITimerServer/UpdateUser", ReplyAction="http://tempuri.org/ITimerServer/UpdateUserResponse")]
         void UpdateUser(DbModels.Models.User user, string[] update_fields);
@@ -126,9 +128,14 @@ namespace AppleTimer.TimerService {
         public TimerServerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
-        
-        public bool UserExists(string username, string password) {
-            return base.Channel.UserExists(username, password);
+		public bool UserExists(string username, string password)
+		{
+			return base.Channel.UserExists(username, password);
+		}
+
+		public bool IsUserUnique(string username, string email)
+		{
+            return base.Channel.IsUserUnique(username, email);
         }
         
         public System.Threading.Tasks.Task<bool> UserExistsAsync(string username, string password) {
@@ -143,11 +150,11 @@ namespace AppleTimer.TimerService {
             return base.Channel.GetUserAsync(username, password);
         }
         
-        public void AddUser(DbModels.Models.User user) {
+        public void AddUser(DbModels.Models.UserCandidate user) {
             base.Channel.AddUser(user);
         }
         
-        public System.Threading.Tasks.Task AddUserAsync(DbModels.Models.User user) {
+        public System.Threading.Tasks.Task AddUserAsync(DbModels.Models.UserCandidate user) {
             return base.Channel.AddUserAsync(user);
         }
         

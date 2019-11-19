@@ -21,7 +21,15 @@ namespace AppleTimer.ViewModels.Windows
 
 		public ICommand CancelCommand
 		{
-			get { return _cancelCommand ?? (_cancelCommand = new RelayCommand<Window>(w => w?.Close())); }
+            get
+            {
+                return _cancelCommand ?? (_cancelCommand = new RelayCommand<Window>(w =>
+                {
+					StationManager.DeleteRecord(StationManager.CurRecord.Id);
+                    w.DialogResult = false;
+                    w?.Close();
+                }));
+            }
 		}
 
 		public ICommand SaveCommand
@@ -39,10 +47,16 @@ namespace AppleTimer.ViewModels.Windows
 
 		private void SaveImplementation(Window win)
 		{
-            StationManager.CurrentUser.Records.Add(StationManager.CurRecord);
-			StationManager.RefreshRecordsList();
-			StationManager.CleanRecord();
+            StationManager.SubmitUpdateRecord(StationManager.CurRecord, new [] { "EndTime", "Duration", "GroupId", "Comment"});
+
+            if (!StationManager.CurrentUser.Records.Contains(StationManager.CurRecord))
+            {
+                StationManager.CurrentUser.Records.Add(StationManager.CurRecord);
+            }
+
+            StationManager.RefreshRecordsList();
+            win.DialogResult = true;
 			win?.Close();
 		}
-	}
+    }
 }

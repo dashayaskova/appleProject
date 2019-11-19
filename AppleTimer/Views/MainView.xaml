@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AppleTimer.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             Width="900" Height="500">
     <UserControl.Resources>
         <Style TargetType="Button">
             <Setter Property="Template">
@@ -35,6 +35,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
@@ -45,30 +46,29 @@
         </Grid.RowDefinitions>
 
 
-        <DataGrid Grid.RowSpan="5" ItemsSource="{Binding ViewSource.View}" AutoGenerateColumns="False" BorderThickness="0">
+        <DataGrid Grid.RowSpan="4" ItemsSource="{Binding ViewSource.View}" SelectedItem="{Binding SelectedRecord}" AutoGenerateColumns="False" BorderThickness="0" CanUserAddRows="False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Comment" Binding="{Binding Comment}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Time" Binding="{Binding Duration}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="3*"/>
+                <DataGridTextColumn Header="Time" Binding="{Binding DurationFormat}" Width="2*"/>
+                <DataGridTextColumn Header="Category" Binding="{Binding Group.Name}" Width="2*"/>
+                
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Grid.Column="3" Grid.Row="0"
+        <Button Grid.Row="5" Margin="60 10" Content="Remove record" Command="{Binding RemoveCommand}"></Button>
+
+        <Button Grid.Column="4" Grid.Row="0"
                 Margin="10 5"
                 HorizontalAlignment="Right"
                 Command="{Binding LogoutCommand}"
                 Content="Logout"/>
 
-        <local:RecordControlView Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1"/>
-        <Label Margin="50 0" Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="1" 
-               Content="{Binding Time}" FontSize="95"></Label>
-        <Button  BorderThickness="0" Grid.Row="3" Grid.Column="1" Margin="80 10 10 10" Command="{Binding Start}">
+        <local:RecordControlView Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1"/>
+        <Label Margin="100 0" Grid.Row="2" Grid.ColumnSpan="4" Grid.Column="1" 
+               Content="{Binding Time}" FontSize="100"></Label>
+        <Button  BorderThickness="0" Grid.Row="3" Grid.Column="2" Margin="80 10 10 10" Command="{Binding Start}">
             <Button.Background>
                 <ImageBrush ImageSource="../Images/play-button.png"></ImageBrush>
-            </Button.Background>
-        </Button>
-        <Button BorderThickness="0" Grid.Row="3" Grid.Column="2" Margin="45 10 45 10" Command="{Binding Pause}" >
-            <Button.Background>
-                <ImageBrush ImageSource="../Images/pause-button.png"></ImageBrush>
             </Button.Background>
         </Button>
         <Button BorderThickness="0" Grid.Row="3" Grid.Column="3" Margin="10 10 80 10" Command="{Binding Stop}">

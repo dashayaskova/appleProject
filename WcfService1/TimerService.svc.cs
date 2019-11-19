@@ -13,6 +13,11 @@ namespace WcfService1
 		private TimerServerImpl _service = new TimerServerImpl();
 
         #region UserMethods
+		public bool IsUserUnique(string username, string email)
+		{
+			return _service.IsUserUnique(username, email);
+		}
+
         public bool UserExists(string username, string password)
         {
             return _service.UserExists(username, password);
@@ -23,7 +28,7 @@ namespace WcfService1
             return _service.GetUser(username, password);
         }
 
-        public void AddUser(User user)
+        public void AddUser(UserCandidate user)
         {
             _service.AddUser(user);
         }

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AppleTimer.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="550" d:DesignWidth="400">
+             d:DesignHeight="550" d:DesignWidth="400" Width="300" Height="500">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -28,7 +28,6 @@
                    FontSize="35" TextAlignment="Center"
                    VerticalAlignment="Center">
             AppleTimer <LineBreak/>
-            <Button Content="SignUp with Google" Height="25" FontSize="15" Margin="8"/>
         </TextBlock>
         <TextBlock Grid.Column="0" Grid.Row="1"
                    FontSize="15" Margin="8 0 0 0" Text="Username*" />
@@ -36,7 +35,7 @@
                  Margin="8"
                  Text="{Binding Username, Mode=TwoWay}"/>
         <TextBlock Grid.Column="0" Grid.Row="3"
-                   FontSize="15" Margin="8 0 0 0" Text="Name" />
+                   FontSize="15" Margin="8 0 0 0" Text="Name*" />
         <TextBox Grid.Column="0" Grid.Row="4"
                  Margin="8"
                  Text="{Binding Name, Mode=TwoWay}"/>

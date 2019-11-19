@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
 namespace DbModels.Models
 {
-	[DataContract]
+	[DataContract(IsReference =true)]
 	public class User : IDBModel
 	{
 		[DataMember]
@@ -15,7 +16,7 @@ namespace DbModels.Models
 		private string _name;
 		[DataMember]
 		private string _email;
-		[DataMember]
+		[IgnoreDataMember]
 		private string _password;
 		[IgnoreDataMember]
 		private List<Group> _groups;
@@ -23,9 +24,13 @@ namespace DbModels.Models
 		private List<Record> _records;
 
 		public Guid Id { get => _id; set => _id = value; }
+
+		[Index(IsUnique = true)]
 		public String Username { get => _username; set => _username = value; }
 		public String Name { get => _name; set => _name = value; }
 		public String Surname { get; set; }
+
+		[Index(IsUnique = true)]
 		public String Email { get => _email; set => _email = value; }
 		public String Password { get => _password; set => _password = value; }
 
