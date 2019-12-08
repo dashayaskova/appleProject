@@ -31,7 +31,7 @@
             </ComboBox.ItemTemplate>
         </xctk:WatermarkComboBox>
         <Button Grid.Column="1" Width="40" Margin="-30 10 0 10" Content="+" Command="{Binding AddGroup}"></Button>
-        <xctk:WatermarkTextBox Grid.ColumnSpan="2" Grid.Row="1" Margin="20 0 20 40" Text="{Binding RecordComment, Mode=TwoWay}"  Watermark="What are you doing?"/>
+        <xctk:WatermarkTextBox Grid.ColumnSpan="2" Grid.Row="1" Margin="20 0 20 40" Text="{Binding RecordComment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Watermark="What are you doing?"/>
 
     </Grid>
 </UserControl>

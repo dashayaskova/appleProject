@@ -167,8 +167,10 @@ namespace AppleTimer.ViewModels
         private void DoLogout(object obj)
         {
             StationManager.DeleteUserInfo();
+            NavigationManager.Instance.Dispose(ViewType.LoginView);
             NavigationManager.Instance.Navigate(ViewType.LoginView);
             NavigationManager.Instance.Dispose(ViewType.MainView);
+            NavigationManager.Instance.Dispose(ViewType.SignUpView);
         }
     }
 }
