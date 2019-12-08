@@ -27,7 +27,7 @@
         <TextBlock Margin="5 0 0 0" Text="Category name: " Grid.Row="1"></TextBlock>
         <TextBlock Margin="5 0 0 0" Text="Color:" Grid.Row="3" ></TextBlock>
 
-        <TextBox Margin="5 3" Text="{Binding Group.Name, Mode=TwoWay}" Grid.Row="2" Grid.ColumnSpan="2" ></TextBox>
+        <TextBox Margin="5 3" Text="{Binding Group.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.ColumnSpan="2" ></TextBox>
         <xctk:ColorPicker DisplayColorAndName="True" Margin="5 3" Grid.Row="4" Grid.ColumnSpan="2" 
                           SelectedColor="{Binding Path=Group.Color, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></xctk:ColorPicker>
 
