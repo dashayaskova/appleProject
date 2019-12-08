@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.Windows;
 using System.Collections.Generic;
+using AppleTimer.TimerService;
 
 namespace AppleTimer.ViewModels
 {
@@ -93,36 +94,47 @@ namespace AppleTimer.ViewModels
             user.Surname = Surname;
 
             LoaderManager.Instance.ShowLoader();
-            using (var serv = new TimerService.TimerServerClient(StationManager.EndpointName))
-            {
-                bool unique = await Task.Run(() =>
-                {
-                    return serv.IsUserUnique(Username, Email);
-                });
+			TimerServerClient serv = null;
 
-                if (!unique)
-                {
-                    MessageBox.Show("User with this username or email already exists");
-                    LoaderManager.Instance.HideLoader();
-                    return;
-                }
-                else
-                {
-                    await Task.Run(() =>
-                    {
-                        serv.AddUser(userCand);
-                    });
-                }
-            }
+			try
+			{
+				serv = new TimerServerClient(StationManager.EndpointName);
+				bool unique = await Task.Run(() =>
+				{
+					return serv.IsUserUnique(Username, Email);
+				});
 
-            LoaderManager.Instance.HideLoader();
-            StationManager.CurRecord = new Record();
-            StationManager.CurRecord.User = user;
-            StationManager.CurRecord.Id = Guid.NewGuid();
-            user.Groups = new List<Group>();
-            user.Records = new List<Record>();
-            StationManager.CurrentUser = user;
-            NavigationManager.Instance.Navigate(ViewType.MainView);
+				if (!unique)
+				{
+					MessageBox.Show("User with this username or email already exists");
+					LoaderManager.Instance.HideLoader();
+					return;
+				}
+				else
+				{
+					await Task.Run(() =>
+					{
+						serv.AddUser(userCand);
+					});
+				}
+				LoaderManager.Instance.HideLoader();
+				StationManager.CurRecord = new Record();
+				StationManager.CurRecord.User = user;
+				StationManager.CurRecord.Id = Guid.NewGuid();
+				user.Groups = new List<Group>();
+				user.Records = new List<Record>();
+				StationManager.CurrentUser = user;
+				NavigationManager.Instance.Navigate(ViewType.MainView);
+			}
+			catch (Exception e)
+			{
+				MessageBox.Show("Ooops, problems with server \n" + e.Message);
+				LoaderManager.Instance.HideLoader();
+			}
+			finally
+			{
+				serv?.Close();
+			}
         }
     }
 }

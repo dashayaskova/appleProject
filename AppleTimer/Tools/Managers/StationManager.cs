@@ -45,26 +45,60 @@ namespace AppleTimer.Tools.Managers
 
         public static void SubmitUpdateRecord(Record record, string[] updateFields)
         {
+			TimerServerClient serv = null;
 
-                using (var serv = new TimerService.TimerServerClient(StationManager.EndpointName))
-                {
-                    serv.UpdateRecord(record, updateFields);
-                }
+			try
+			{
+				serv = new TimerServerClient(EndpointName);
+				serv.UpdateRecord(record, updateFields);
+			}
+			catch (Exception e)
+			{
+				MessageBox.Show("Ooops, problems with server \n" + e.Message);
+			}
+			finally
+			{
+				serv?.Close();
+			}
         }
 		public static Record GetUnfinishedRecord(User user)
 		{
-			using (var serv = new TimerService.TimerServerClient(StationManager.EndpointName))
+			TimerServerClient serv = null;
+
+			try
 			{
+				serv = new TimerServerClient(EndpointName);
 				var record = serv.GetUserRecords(user).Where(r => r.EndTime == null).FirstOrDefault();
 				return record;
 			}
+			catch (Exception e)
+			{
+				MessageBox.Show("Ooops, problems with server \n" + e.Message);
+			}
+			finally
+			{
+				serv?.Close();
+			}
+
+			return null;
 		}
 
 		public static void DeleteRecord(Guid guid)
 		{
-			using (var serv = new TimerServerClient())
+			TimerServerClient serv = null;
+
+			try
 			{
+				serv = new TimerServerClient(EndpointName);
 				serv.DeleteRecords(new Guid[] { guid });
+			}
+			catch (Exception e)
+			{
+				MessageBox.Show("Ooops, problems with server \n" + e.Message);
+			}
+			finally
+			{
+				serv?.Close();
 			}
 		}
 	}
