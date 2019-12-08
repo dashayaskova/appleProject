@@ -7,6 +7,7 @@ using AppleTimer.Tools.Managers;
 using AppleTimer.Tools.Navigation;
 using System.Linq;
 using DbModels.Models;
+using AppleTimer.TimerService;
 
 namespace AppleTimer.ViewModels
 {
@@ -49,49 +50,60 @@ namespace AppleTimer.ViewModels
         private async void DoLogin(PasswordBox pb)
         {
             LoaderManager.Instance.ShowLoader();
-            using (var serv = new TimerService.TimerServerClient(StationManager.EndpointName))
-            {
-                var result = await Task.Run(() =>
-                {
-                    if (!serv.UserExists(Username, pb.Password))
-                    {
-                        return null;
-                    }
-                    User user = serv.GetUser(Username, pb.Password);
-                    user.Groups = serv.GetUserGroups(user).ToList();
-                    user.Records = serv.GetUserRecords(user).ToList();
-                    return user;
-                });
+			TimerServerClient serv = null;
+
+			try
+			{
+				serv = new TimerServerClient(StationManager.EndpointName);
+				var result = await Task.Run(() =>
+				{
+					if (!serv.UserExists(Username, pb.Password))
+					{
+						return null;
+					}
+					User user = serv.GetUser(Username, pb.Password);
+					user.Groups = serv.GetUserGroups(user).ToList();
+					user.Records = serv.GetUserRecords(user).ToList();
+					return user;
+				});
 
 
-                if (result == null)
-                {
-                    MessageBox.Show("Oooops. Couldn't find you.");
-                    LoaderManager.Instance.HideLoader();
-                    return;
-                }
-                else
-                {
-                    StationManager.CurrentUser = result;
-                    var record = await Task.Run(() => serv.GetUserRecords(result).Where(r => r.EndTime == null).FirstOrDefault());
-                    if (record != null)
-                    {
-                        record.User = result;
-                        StationManager.CurRecord = record;
-                    }
-                    else
-                    {
-                        Record rec = new Record();
-                        rec.User = result;
-                        rec.Id = Guid.NewGuid();
-                        StationManager.CurRecord = rec;
-                    }
-                    LoaderManager.Instance.HideLoader();
-                    pb.Clear();
-                    NavigationManager.Instance.Navigate(ViewType.MainView);
-                }
-
-            }
+				if (result == null)
+				{
+					MessageBox.Show("Oooops. Couldn't find you.");
+					LoaderManager.Instance.HideLoader();
+					return;
+				}
+				else
+				{
+					StationManager.CurrentUser = result;
+					var record = await Task.Run(() => serv.GetUserRecords(result).Where(r => r.EndTime == null).FirstOrDefault());
+					if (record != null)
+					{
+						record.User = result;
+						StationManager.CurRecord = record;
+					}
+					else
+					{
+						Record rec = new Record();
+						rec.User = result;
+						rec.Id = Guid.NewGuid();
+						StationManager.CurRecord = rec;
+					}
+					LoaderManager.Instance.HideLoader();
+					pb.Clear();
+					NavigationManager.Instance.Navigate(ViewType.MainView);
+				}
+			}
+			catch (Exception e)
+			{
+				MessageBox.Show("Ooops, problems with server \n" + e.Message);
+				LoaderManager.Instance.HideLoader();
+			}
+			finally
+			{
+				serv?.Close();
+			}
         }
     }
 
